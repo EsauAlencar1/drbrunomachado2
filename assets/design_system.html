@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Pulsedesk — Design System & Component Library</title>
+
+<!-- Fonts -->
+<link href="4bcb63d746dc1754_css2.css" rel="stylesheet"/>
+<link href="b626255d7795be45_css2.css" rel="stylesheet"/>
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="css/fonts.css"/>
+<link rel="stylesheet" href="css/animations.css"/>
+
+<!-- Scripts -->
+<script src="176e894661aa9cdc_3.4.17"></script>
+<script src="758d94838db0cafd_iconify-icon.min.js"></script>
+
+<style>
+  /* Custom micro-animations & scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(34, 211, 238, 0.15);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(34, 211, 238, 0.3);
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Toast notification for copy to clipboard */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    color: #e2e8f0;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(34, 211, 238, 0.1);
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 9999;
+  }
+  .toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+</style>
+</head>
+<body class="min-h-screen overflow-x-hidden antialiased text-slate-100 bg-[#080c14] font-sans selection:bg-cyan-300/20 selection:text-cyan-100" style="font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+
+<!-- Background layers -->
+<div class="pointer-events-none fixed inset-0 -z-50" style="background: radial-gradient(circle at 50% -10%, rgba(88, 166, 255, 0.14), transparent 38%), radial-gradient(circle at 85% 25%, rgba(103, 232, 249, 0.06), transparent 28%), linear-gradient(180deg, #0b1020 0%, #080c14 45%, #0a0d13 100%);"></div>
+<div class="pointer-events-none fixed inset-0 -z-40 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+
+<!-- Container Grid -->
+<div class="mx-auto min-h-screen w-full max-w-[1400px] border-x border-white/[0.05] grid grid-cols-[280px_1fr]">
+
+  <!-- Sidebar (Left) -->
+  <aside class="sticky top-0 h-screen border-r border-white/[0.05] bg-[#080c14]/40 backdrop-blur-xl p-6 flex flex-col justify-between z-50">
+    <div class="space-y-8">
+      <!-- Logo -->
+      <a class="flex items-center gap-3 mt-2" href="#">
+        <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-cyan-400/[0.1] border border-cyan-400/20 text-cyan-300">
+          <iconify-icon icon="solar:widget-3-bold-duotone" width="18"></iconify-icon>
+        </span>
+        <span class="text-base font-bold text-white tracking-[-0.035em] font-geist">Pulsedesk</span>
+        <span class="text-[9px] uppercase tracking-widest text-cyan-400 bg-cyan-400/10 px-1.5 py-0.5 rounded border border-cyan-400/20">v1.0</span>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="space-y-1.5">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500 mb-3 font-geist">Design System</p>
+        <a class="flex items-center gap-2.5 rounded-xl bg-cyan-400/[0.08] border border-cyan-400/10 px-3 py-2.5 text-xs font-semibold text-cyan-200 transition duration-200 hover:bg-cyan-400/[0.12] font-geist nav-link-item" href="#overview" data-section="overview">
+          <iconify-icon icon="solar:info-square-linear" width="16"></iconify-icon>Overview
+        </a>
+        <a class="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-xs text-slate-400 transition duration-200 hover:bg-white/[0.04] hover:text-slate-200 font-geist nav-link-item" href="#tokens" data-section="tokens">
+          <iconify-icon icon="solar:palette-linear" width="16"></iconify-icon>Design Tokens
+        </a>
+        <a class="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-xs text-slate-400 transition duration-200 hover:bg-white/[0.04] hover:text-slate-200 font-geist nav-link-item" href="#buttons" data-section="buttons">
+          <iconify-icon icon="solar:mouse-linear" width="16"></iconify-icon>Buttons & Badges
+        </a>
+        <a class="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-xs text-slate-400 transition duration-200 hover:bg-white/[0.04] hover:text-slate-200 font-geist nav-link-item" href="#cards" data-section="cards">
+          <iconify-icon icon="solar:card-2-linear" width="16"></iconify-icon>Cards & Panels
+        </a>
+        <a class="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-xs text-slate-400 transition duration-200 hover:bg-white/[0.04] hover:text-slate-200 font-geist nav-link-item" href="#live" data-section="live">
+          <iconify-icon icon="solar:play-circle-linear" width="16"></iconify-icon>Live UI Components
+        </a>
+        <a class="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-xs text-slate-400 transition duration-200 hover:bg-white/[0.04] hover:text-slate-200 font-geist nav-link-item" href="#code" data-section="code">
+          <iconify-icon icon="solar:code-linear" width="16"></iconify-icon>Code Center
+        </a>
+      </nav>
+    </div>
+
+    <!-- User Profile & Settings -->
+    <div class="border-t border-white/[0.06] pt-4 mt-auto">
+      <div class="flex items-center gap-3">
+        <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full">
+          <img alt="Avatar" class="h-full w-full object-cover" src="46d532f33f5ae429_100.jpg"/>
+        </span>
+        <div>
+          <p class="text-xs font-semibold text-white font-geist">Equipe de Design</p>
+          <p class="text-[10px] text-slate-500 font-geist">Pulsedesk SaaS</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content (Right) -->
+  <main class="p-8 sm:p-12 space-y-16 overflow-y-auto max-h-screen">
+
+    <!-- Header Panel -->
+    <header class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-b border-white/[0.06] pb-8 [animation:animationIn_0.8s_ease-out_0.1s_both]">
+      <div>
+        <div class="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/[0.05] px-2.5 py-1 text-[11px] text-cyan-300 font-geist mb-3">
+          <span class="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+          Guia de Estilo & Sandbox
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-medium tracking-tight text-white font-jakarta">Pulsedesk Design System</h1>
+        <p class="mt-3 text-slate-400 text-sm max-w-2xl font-geist">Explore, visualize e copie os elementos visuais, classes e componentes interativos criados para a melhor experiência SaaS.</p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="../design-system.html" class="flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/[0.12] transition px-4 py-2.5 text-xs font-medium text-slate-200 font-geist">
+          <iconify-icon icon="solar:arrow-left-up-linear" width="16"></iconify-icon>
+          Voltar ao App
+        </a>
+      </div>
+    </header>
+
+    <!-- Section 1: Overview -->
+    <section id="overview" class="space-y-6 scroll-mt-24 [animation:animationIn_0.8s_ease-out_0.2s_both]">
+      <div class="border-b border-white/[0.06] pb-3">
+        <h2 class="text-2xl font-semibold text-white tracking-tight font-jakarta">01 · Overview & Identity</h2>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="rounded-3xl border border-white/[0.06] bg-white/[0.02] p-6 space-y-4">
+          <h3 class="text-lg font-medium text-white font-jakarta">Princípios visuais</h3>
+          <p class="text-sm leading-relaxed text-slate-400 font-geist">O design do Pulsedesk é pautado pela <strong>clareza máxima</strong>, utilizando layout focado em reduzir a fadiga de decisão dos usuários. Usamos tons escuros profundos balanceados por linhas finas translúcidas de 1px, tipografia minimalista e toques sutis de glows neon para gerar profundidade e requinte.</p>
+        </div>
+        <div class="rounded-3xl border border-white/[0.06] bg-white/[0.02] p-6 space-y-4">
+          <h3 class="text-lg font-medium text-white font-jakarta">Fontes do Sistema</h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-4 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
+              <div>
+                <p class="text-xs text-slate-500 font-geist">Família de Títulos</p>
+                <p class="text-sm font-semibold text-white font-jakarta mt-0.5">Plus Jakarta Sans</p>
+              </div>
+              <span class="text-xl font-medium text-slate-300 font-jakarta">Aa Bb Cc</span>
+            </div>
+            <div class="flex items-center justify-between gap-4 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
+              <div>
+                <p class="text-xs text-slate-500 font-geist">Família de Corpo & UI</p>
+                <p class="text-sm font-semibold text-white font-geist mt-0.5">Geist</p>
+              </div>
+              <span class="text-xl font-medium text-slate-300 font-geist">Aa Bb Cc</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Design Tokens (Colors & Typography) -->
+    <section id="tokens" class="space-y-6 scroll-mt-24">
+      <div class="border-b border-white/[0.06] pb-3">
+        <h2 class="text-2xl font-semibold text-white tracking-tight font-jakarta">02 · Design Tokens</h2>
+      </div>
+
+      <!-- Color Swatches -->
+      <div class="space-y-4">
+        <h3 class="text-lg font-medium text-white font-jakarta">Paleta de Cores (Tailwind & HEX)</h3>
+        <p class="text-sm text-slate-400 font-geist">Clique em qualquer swatch de cor para copiar sua classe de cor do Tailwind.</p>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <!-- Background Dark -->
+          <div onclick="copyText('bg-[#080c14]', 'Classe copiada!')" class="group relative rounded-2xl border border-white/[0.08] bg-[#080c14] p-4 cursor-pointer transition hover:border-cyan-400/40 hover:-translate-y-0.5">
+            <div class="h-20 w-full rounded-lg bg-[#080c14] border border-white/5 mb-3 shadow-inner"></div>
+            <p class="text-xs font-semibold text-white font-geist">Dark Dark</p>
+            <p class="text-[10px] text-slate-400 mt-1 font-geist">#080c14</p>
+            <span class="absolute right-3 bottom-3 text-slate-500 opacity-0 group-hover:opacity-100 transition"><iconify-icon icon="solar:copy-linear" width="14"></iconify-icon></span>
+          </div>
+
+          <!-- Deep Blue -->
+          <div onclick="copyText('bg-[#0b1220]', 'Classe copiada!')" class="group relative rounded-2xl border border-white/[0.08] bg-[#0b1220] p-4 cursor-pointer transition hover:border-cyan-400/40 hover:-translate-y-0.5">
+            <div class="h-20 w-full rounded-lg bg-[#0b1220] mb-3"></div>
+            <p class="text-xs font-semibold text-white font-geist">Deep Blue</p>
+            <p class="text-[10px] text-slate-400 mt-1 font-geist">#0b1220</p>
+            <span class="absolute right-3 bottom-3 text-slate-500 opacity-0 group-hover:opacity-100 transition"><iconify-icon icon="solar:copy-linear" width="14"></iconify-icon></span>
+          </div>
+
+          <!-- Cyan Bright -->
+          <div onclick="copyText('bg-cyan-100', 'Classe copiada!')" class="group relative rounded-2xl border border-white/[0.08] bg-cyan-950/30 p-4 cursor-pointer transition hover:border-cyan-400/40 hover:-translate-y-0.5">
+            <div class="h-20 w-full rounded-lg bg-cyan-100 mb-3 shadow-lg shadow-cyan-100/10"></div>
+            <p class="text-xs font-semibold text-white font-geist">Cyan Light</p>
+            <p class="text-[10px] text-slate-400 mt-1 font-geist">#ecfeff</p>
+            <span class="absolute right-3 bottom-3 text-slate-500 opacity-0 group-hover:opacity-100 transition"><iconify-icon icon="solar:copy-linear" width="14"></iconify-icon></span>
+          </div>
+
+          <!-- Cyan Glow -->
+          <div onclick="copyText('bg-cyan-300', 'Classe copiada!')" class="group relative rounded-2xl border border-white/[0.08] bg-[#0e2a3c] p-4 cursor-pointer transition hover:border-cyan-400/40 hover:-translate-y-0.5">
+            <div class="h-20 w-full rounded-lg bg-cyan-300 mb-3 shadow-lg shadow-cyan-300/10"></div>
+            <p class="text-xs font-semibold text-white font-geist">Cyan Glow</p>
+            <p class="text-[10px] text-slate-400 mt-1 font-geist">#67e8f9</p>
+            <span class="absolute right-3 bottom-3 text-slate-500 opacity-0 group-hover:opacity-100 transition"><iconify-icon icon="solar:copy-linear" width="14"></iconify-icon></span>
+          </div>
+
+          <!-- Emerald Acc -->
+          <div onclick="copyText('bg-emerald-300', 'Classe copiada!')" class="group relative rounded-2xl border border-white/[0.08] bg-emerald-950/20 p-4 cursor-pointer transition hover:border-cyan-400/40 hover:-translate-y-0.5">
+            <div class="h-20 w-full rounded-lg bg-emerald-300 mb-3 shadow-lg shadow-emerald-300/10"></div>
+            <p class="text-xs font-semibold text-white font-geist">Emerald Glow</p>
+            <p class="text-[10px] text-slate-400 mt-1 font-geist">#6ee7b7</p>
+            <span class="absolute right-3 bottom-3 text-slate-500 opacity-0 group-hover:opacity-100 transition"><iconify-icon icon="solar:copy-linear" width="14"></iconify-icon></span>
+          </div>
+
+          <!-- Rose Acc -->
+          <div onclick="copyText('bg-rose-300', 'Classe copiada!')" class="group relative rounded-2xl border border-white/[0.08] bg-rose-950/20 p-4 cursor-pointer transition hover:border-cyan-400/40 hover:-translate-y-0.5">
+            <div class="h-20 w-full rounded-lg bg-rose-300 mb-3 shadow-lg shadow-rose-300/10"></div>
+            <p class="text-xs font-semibold text-white font-geist">Rose Accent</p>
+            <p class="text-[10px] text-slate-400 mt-1 font-geist">#fda4af</p>
+            <span class="absolute right-3 bottom-3 text-slate-500 opacity-0 group-hover:opacity-100 transition"><iconify-icon icon="solar:copy-linear" width="14"></iconify-icon></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography Showcase -->
+      <div class="space-y-4 pt-4">
+        <h3 class="text-lg font-medium text-white font-jakarta">Escala Tipográfica</h3>
+        <div class="overflow-x-auto rounded-2xl border border-white/[0.06] bg-white/[0.01] p-4">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-white/[0.06] text-slate-500 font-geist">
+                <th class="py-3 px-4 uppercase tracking-wider font-semibold">Token</th>
+                <th class="py-3 px-4 uppercase tracking-wider font-semibold">Tamanho / Estilo</th>
+                <th class="py-3 px-4 uppercase tracking-wider font-semibold">Visualização</th>
+                <th class="py-3 px-4 uppercase tracking-wider font-semibold text-right">Classes Tailwind</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/[0.04]">
+              <!-- Hero H1 -->
+              <tr class="hover:bg-white/[0.01] transition">
+                <td class="py-4 px-4 font-semibold text-slate-300 font-geist">Display H1</td>
+                <td class="py-4 px-4 text-slate-400 font-geist">64px / Medium / Tracking Tighter</td>
+                <td class="py-4 px-4 font-jakarta text-2xl font-medium text-white">Gestão sem sobrecarga.</td>
+                <td class="py-4 px-4 text-right"><code onclick="copyText('text-5xl sm:text-6xl lg:text-7xl font-medium tracking-tighter font-jakarta', 'Copiado!')" class="cursor-pointer bg-white/[0.04] text-cyan-300 px-2 py-1 rounded text-[10px] border border-white/[0.06] font-mono">text-6xl font-medium tracking-tighter</code></td>
+              </tr>
+              <!-- Section H2 -->
+              <tr class="hover:bg-white/[0.01] transition">
+                <td class="py-4 px-4 font-semibold text-slate-300 font-geist">Section H2</td>
+                <td class="py-4 px-4 text-slate-400 font-geist">36px / Medium / Tracking Tight</td>
+                <td class="py-4 px-4 font-jakarta text-xl font-medium text-white">Tudo o que você precisa.</td>
+                <td class="py-4 px-4 text-right"><code onclick="copyText('text-4xl text-white sm:text-5xl lg:text-6xl tracking-tighter font-jakarta font-medium', 'Copiado!')" class="cursor-pointer bg-white/[0.04] text-cyan-300 px-2 py-1 rounded text-[10px] border border-white/[0.06] font-mono">text-4xl sm:text-5xl font-medium</code></td>
+              </tr>
+              <!-- Component Title -->
+              <tr class="hover:bg-white/[0.01] transition">
+                <td class="py-4 px-4 font-semibold text-slate-300 font-geist">Title H3</td>
+                <td class="py-4 px-4 text-slate-400 font-geist">18px / Semibold / Body Font</td>
+                <td class="py-4 px-4 font-geist text-base font-semibold text-white">Visualização de tarefas</td>
+                <td class="py-4 px-4 text-right"><code onclick="copyText('text-lg font-semibold text-white font-geist', 'Copiado!')" class="cursor-pointer bg-white/[0.04] text-cyan-300 px-2 py-1 rounded text-[10px] border border-white/[0.06] font-mono">text-lg font-semibold</code></td>
+              </tr>
+              <!-- UI Label (Eyebrow) -->
+              <tr class="hover:bg-white/[0.01] transition">
+                <td class="py-4 px-4 font-semibold text-slate-300 font-geist">Eyebrow</td>
+                <td class="py-4 px-4 text-slate-400 font-geist">11px / Semibold / Tracking Wider</td>
+                <td class="py-4 px-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-200 font-geist">Passo 01 · Prévia</td>
+                <td class="py-4 px-4 text-right"><code onclick="copyText('text-[11px] font-semibold tracking-widest text-cyan-200 uppercase font-geist', 'Copiado!')" class="cursor-pointer bg-white/[0.04] text-cyan-300 px-2 py-1 rounded text-[10px] border border-white/[0.06] font-mono">text-[11px] uppercase tracking-widest</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Buttons & Badges -->
+    <section id="buttons" class="space-y-6 scroll-mt-24">
+      <div class="border-b border-white/[0.06] pb-3">
+        <h2 class="text-2xl font-semibold text-white tracking-tight font-jakarta">03 · Buttons & Badges</h2>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <!-- Buttons Box -->
+        <div class="rounded-3xl border border-white/[0.06] bg-white/[0.02] p-6 space-y-6">
+          <h3 class="text-lg font-medium text-white font-jakarta">Botões</h3>
+          
+          <div class="flex flex-wrap gap-4 items-center">
+            <!-- Primary Button -->
+            <div class="space-y-2">
+              <p class="text-[10px] text-slate-500 font-geist">Primário (Cyan)</p>
+              <button onclick="copyComponentCode('btn-primary')" class="group inline-flex items-center justify-center gap-2 text-sm font-semibold text-slate-950 bg-cyan-100 rounded-full px-5 py-2.5 transition duration-300 hover:scale-[1.03] hover:bg-cyan-50 shadow-lg shadow-cyan-950/20 font-geist">
+                Iniciar grátis
+                <iconify-icon class="transition duration-300 group-hover:translate-x-0.5" icon="solar:arrow-right-linear" width="16"></iconify-icon>
+              </button>
+            </div>
+
+            <!-- Secondary Button -->
+            <div class="space-y-2">
+              <p class="text-[10px] text-slate-500 font-geist">Secundário (Slate)</p>
+              <button onclick="copyComponentCode('btn-secondary')" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-5 py-2.5 text-sm font-medium text-slate-200 transition duration-300 hover:scale-[1.02] hover:border-white/[0.18] hover:bg-white/[0.07] font-geist">
+                Ver demo
+                <iconify-icon icon="solar:checklist-minimalistic-linear" width="16"></iconify-icon>
+              </button>
+            </div>
+
+            <!-- Small Rounded Icon -->
+            <div class="space-y-2">
+              <p class="text-[10px] text-slate-500 font-geist">Icon Only</p>
+              <button onclick="copyComponentCode('btn-icon')" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition hover:bg-white/[0.08] hover:text-white">
+                <iconify-icon icon="solar:hamburger-menu-linear" width="18"></iconify-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badges Box -->
+        <div class="rounded-3xl border border-white/[0.06] bg-white/[0.02] p-6 space-y-6">
+          <h3 class="text-lg font-medium text-white font-jakarta">Badges & Tags</h3>
+          
+          <div class="flex flex-wrap gap-3 items-center">
+            <div class="space-y-1">
+              <p class="text-[10px] text-slate-500 font-geist">Alta Prioridade</p>
+              <span class="inline-flex rounded-full bg-cyan-400/[0.15] px-2.5 py-1 text-[10px] font-semibold text-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.15)] font-geist">Alta</span>
+            </div>
+            
+            <div class="space-y-1">
+              <p class="text-[10px] text-slate-500 font-geist">Normal</p>
+              <span class="inline-flex rounded-full bg-white/[0.08] px-2.5 py-1 text-[10px] text-slate-300 font-geist">Normal</span>
+            </div>
+            
+            <div class="space-y-1">
+              <p class="text-[10px] text-slate-500 font-geist">Concluída</p>
+              <span class="inline-flex rounded-full bg-emerald-400/[0.12] px-2.5 py-1 text-[10px] font-semibold text-emerald-300 font-geist">Pronta</span>
+            </div>
+
+            <div class="space-y-1">
+              <p class="text-[10px] text-slate-500 font-geist">Alerta</p>
+              <span class="inline-flex rounded-full bg-rose-400/[0.12] px-2.5 py-1 text-[10px] font-semibold text-rose-300 font-geist">Atrasada</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Cards & Panels -->
+    <section id="cards" class="space-y-6 scroll-mt-24">
+      <div class="border-b border-white/[0.06] pb-3">
+        <h2 class="text-2xl font-semibold text-white tracking-tight font-jakarta">04 · Cards & Panels</h2>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <!-- Floating glassmorphism card template -->
+        <div class="group relative rounded-3xl border border-white/[0.12] bg-slate-950/75 p-6 shadow-2xl backdrop-blur-xl transition duration-500 hover:border-cyan-200/30 overflow-hidden">
+          <div aria-hidden="true" class="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.05] blur-[60px] pointer-events-none"></div>
+          
+          <div class="relative z-10 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+              <p class="text-xs text-slate-400 font-geist">Workspace Pulsedesk</p>
+              <span class="flex items-center gap-1 text-[10px] text-slate-500 font-geist">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Ativo
+              </span>
+            </div>
+            
+            <h4 class="text-base font-semibold text-white font-geist">Finalizar fluxo de onboarding</h4>
+            <p class="text-xs text-slate-400 font-geist leading-relaxed">Etapa crítica para garantir que novos usuários configurem seus painéis sem atritos visuais.</p>
+            
+            <div class="flex items-center justify-between pt-2">
+              <span class="rounded-full bg-cyan-400/[0.15] px-2 py-0.5 text-[10px] font-semibold text-cyan-200 font-geist">Alta Prioridade</span>
+              <div class="flex -space-x-1.5">
+                <span class="h-6 w-6 rounded-full border-2 border-slate-950 bg-cyan-200"></span>
+                <span class="h-6 w-6 rounded-full border-2 border-slate-950 bg-slate-400"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress and charts card -->
+        <div class="rounded-3xl border border-white/[0.07] bg-white/[0.02] p-6 flex flex-col justify-between space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs font-semibold text-white font-geist">Status da entrega</p>
+              <p class="text-[10px] text-slate-500 font-geist">Monitoramento diário do Sprint</p>
+            </div>
+            <span class="text-sm font-semibold text-cyan-300 font-geist">78%</span>
+          </div>
+
+          <!-- Progress Bars -->
+          <div class="space-y-3">
+            <div>
+              <div class="mb-1 flex justify-between text-[10px] text-slate-400">
+                <span class="font-geist">Redesign do Site</span><span class="font-geist">78%</span>
+              </div>
+              <div class="h-1.5 overflow-hidden rounded-full bg-white/10">
+                <div class="h-full w-[78%] rounded-full bg-cyan-300 relative overflow-hidden">
+                  <div class="absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-white/40 to-transparent" style="animation: progress-shimmer 2s infinite linear;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="mb-1 flex justify-between text-[10px] text-slate-400">
+                <span class="font-geist">App Mobile v2.0</span><span class="font-geist">62%</span>
+              </div>
+              <div class="h-1.5 overflow-hidden rounded-full bg-white/10">
+                <div class="h-full w-[62%] rounded-full bg-blue-400 relative overflow-hidden">
+                  <div class="absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-white/40 to-transparent" style="animation: progress-shimmer 2s infinite linear 1s;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Live UI Components -->
+    <section id="live" class="space-y-6 scroll-mt-24">
+      <div class="border-b border-white/[0.06] pb-3">
+        <h2 class="text-2xl font-semibold text-white tracking-tight font-jakarta">05 · Live UI Components</h2>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-[1.2fr_0.8fr]">
+        <!-- Component A: Interactive Task Checklist (Functional!) -->
+        <div class="rounded-3xl border border-white/[0.08] bg-[#0b1220]/80 p-6 flex flex-col justify-between shadow-2xl relative">
+          <div aria-hidden="true" class="absolute right-4 top-4 h-24 w-24 rounded-full bg-cyan-400/[0.03] blur-3xl pointer-events-none"></div>
+          
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+              <div>
+                <h3 class="text-base font-semibold text-white font-geist">Minhas Tarefas Interativas</h3>
+                <p class="text-[10px] text-slate-500 font-geist">Adicione tarefas e toggle checks para ver os contadores atualizarem ao vivo!</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="rounded-full bg-white/[0.08] px-2 py-0.5 text-[9px] text-slate-300 font-geist" id="live-task-counter">3 tarefas</span>
+              </div>
+            </div>
+
+            <!-- Task input form -->
+            <form id="task-form" class="flex gap-2" onsubmit="event.preventDefault(); addTask();">
+              <input type="text" id="task-input" placeholder="Nova tarefa..." required class="flex-1 bg-black/30 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400/50 transition font-geist"/>
+              <select id="task-priority" class="bg-black/30 border border-white/10 rounded-xl px-2 py-2 text-xs text-slate-300 focus:outline-none focus:border-cyan-400/50 transition font-geist">
+                <option class="bg-[#0b1220] text-slate-300" value="Alta">Alta</option>
+                <option class="bg-[#0b1220] text-slate-300" value="Normal" selected>Normal</option>
+                <option class="bg-[#0b1220] text-slate-300" value="Pronta">Pronta</option>
+              </select>
+              <button type="submit" class="flex h-8 w-8 items-center justify-center rounded-xl bg-cyan-100 hover:bg-cyan-50 text-slate-950 font-semibold transition hover:scale-[1.03] font-geist">+</button>
+            </form>
+
+            <!-- Tasks list (JS injected) -->
+            <div class="space-y-2 mt-4" id="live-task-list">
+              <!-- Default task 1 -->
+              <div class="flex items-center justify-between gap-3 p-3 rounded-xl border border-cyan-200/10 bg-cyan-400/[0.03] live-task-item" data-id="1">
+                <div class="flex items-center gap-3">
+                  <input type="checkbox" onchange="toggleTask(1)" class="h-4 w-4 rounded border-white/20 bg-black/20 text-cyan-500 focus:ring-0 focus:ring-offset-0 cursor-pointer"/>
+                  <span class="text-xs text-slate-200 font-geist task-text">Finalizar design do cabeçalho</span>
+                </div>
+                <span class="rounded-full bg-cyan-400/[0.15] px-2 py-0.5 text-[9px] font-semibold text-cyan-200 font-geist">Alta</span>
+              </div>
+              
+              <!-- Default task 2 -->
+              <div class="flex items-center justify-between gap-3 p-3 rounded-xl border border-white/[0.06] bg-white/[0.02] live-task-item" data-id="2">
+                <div class="flex items-center gap-3">
+                  <input type="checkbox" onchange="toggleTask(2)" class="h-4 w-4 rounded border-white/20 bg-black/20 text-cyan-500 focus:ring-0 focus:ring-offset-0 cursor-pointer"/>
+                  <span class="text-xs text-slate-200 font-geist task-text">Otimizar scripts de carregamento</span>
+                </div>
+                <span class="rounded-full bg-white/[0.08] px-2 py-0.5 text-[9px] text-slate-300 font-geist">Normal</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Stats summary at the bottom of component -->
+          <div class="mt-6 border-t border-white/[0.06] pt-4 flex items-center justify-between text-xs text-slate-500 font-geist">
+            <span>Concluídas: <strong class="text-emerald-300" id="live-done-count">0</strong></span>
+            <span>Sprint Health: <strong class="text-cyan-300" id="live-health-percent">75%</strong></span>
+          </div>
+        </div>
+
+        <!-- Component B: Milestone Timeline -->
+        <div class="rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 space-y-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-semibold text-white font-geist">Linha de tempo</h3>
+            <span class="rounded-full bg-emerald-400/[0.12] px-2 py-0.5 text-[9px] font-semibold text-emerald-300 font-geist">No Prazo</span>
+          </div>
+
+          <!-- Timeline entries -->
+          <div class="relative pl-6 border-l border-white/10 space-y-6">
+            <!-- Item 1 -->
+            <div class="relative">
+              <span class="absolute -left-[30px] top-1 flex h-4.5 w-4.5 items-center justify-center rounded-full border-2 border-emerald-300 bg-[#080c14] text-[8px] text-emerald-300">
+                <iconify-icon icon="solar:check-circle-bold" width="10"></iconify-icon>
+              </span>
+              <p class="text-xs font-semibold text-white font-geist">Planejamento</p>
+              <p class="text-[10px] text-slate-400 mt-0.5 font-geist">Finalizado há 2 semanas · Sprint 1</p>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="relative">
+              <span class="absolute -left-[30px] top-1 flex h-4.5 w-4.5 items-center justify-center rounded-full border-2 border-emerald-300 bg-[#080c14] text-[8px] text-emerald-300">
+                <iconify-icon icon="solar:check-circle-bold" width="10"></iconify-icon>
+              </span>
+              <p class="text-xs font-semibold text-white font-geist">Etapa de UI/UX</p>
+              <p class="text-[10px] text-slate-400 mt-0.5 font-geist">Aprovada pela equipe de design · Ontem</p>
+            </div>
+
+            <!-- Item 3 (Active) -->
+            <div class="relative">
+              <span class="absolute -left-[30px] top-1 flex h-4.5 w-4.5 items-center justify-center rounded-full border-2 border-cyan-300 bg-cyan-300 shadow-lg shadow-cyan-300/40 animate-pulse"></span>
+              <p class="text-xs font-semibold text-cyan-200 font-geist">Desenvolvimento do Core</p>
+              <p class="text-[10px] text-slate-300 mt-0.5 font-geist">Em andamento ativo · Restam 4 tarefas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Code Center (Copy-paste utility) -->
+    <section id="code" class="space-y-6 scroll-mt-24">
+      <div class="border-b border-white/[0.06] pb-3">
+        <h2 class="text-2xl font-semibold text-white tracking-tight font-jakarta">06 · Code Center</h2>
+      </div>
+
+      <div class="rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h3 class="text-base font-semibold text-white font-geist">Explorador de Componentes</h3>
+            <p class="text-xs text-slate-400 mt-1 font-geist">Selecione um componente para visualizar as classes de estilo prontas do Tailwind CSS e copie-o.</p>
+          </div>
+          
+          <!-- Component Selector -->
+          <div class="flex gap-2 flex-wrap">
+            <button onclick="selectCodeComponent('btn-primary')" class="rounded-xl border border-cyan-400/20 bg-cyan-400/10 hover:bg-cyan-400/20 transition px-3 py-1.5 text-xs text-cyan-300 font-geist font-medium code-select-btn" id="btn-primary-sel">Botão Primário</button>
+            <button onclick="selectCodeComponent('badge-high')" class="rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] transition px-3 py-1.5 text-xs text-slate-400 font-geist font-medium code-select-btn" id="badge-high-sel">Badge Alta Prioridade</button>
+            <button onclick="selectCodeComponent('glass-card')" class="rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] transition px-3 py-1.5 text-xs text-slate-400 font-geist font-medium code-select-btn" id="glass-card-sel">Card Glassmorphism</button>
+          </div>
+        </div>
+
+        <!-- Code Viewer Box -->
+        <div class="relative rounded-2xl border border-white/[0.08] bg-black/40 p-4 font-mono text-xs overflow-hidden">
+          <div class="flex justify-between items-center border-b border-white/[0.06] pb-2 mb-3">
+            <span class="text-slate-500 font-mono" id="code-lang">html</span>
+            <button onclick="copyCurrentComponentCode()" class="flex items-center gap-1.5 text-cyan-300 hover:text-cyan-200 transition font-geist text-xs">
+              <iconify-icon icon="solar:copy-linear" width="14"></iconify-icon>
+              Copiar Código
+            </button>
+          </div>
+          <pre class="overflow-x-auto text-slate-300 leading-5 text-[11px]" id="code-content">&lt;!-- Botão Primário Cyan --&gt;
+&lt;button class="group inline-flex items-center justify-center gap-2 text-sm font-semibold text-slate-950 bg-cyan-100 rounded-full px-5 py-2.5 transition duration-300 hover:scale-[1.03] hover:bg-cyan-50 shadow-lg shadow-cyan-950/20 font-geist"&gt;
+  Iniciar grátis
+  &lt;iconify-icon class="transition duration-300 group-hover:translate-x-0.5" icon="solar:arrow-right-linear" width="16"&gt;&lt;/iconify-icon&gt;
+&lt;/button&gt;</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/[0.06] pt-8 mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-geist">
+      <p>&copy; 2026 Pulsedesk. Todos os direitos reservados.</p>
+      <div class="flex gap-4">
+        <a href="#overview" class="hover:text-slate-300 transition">Overview</a>
+        <a href="#tokens" class="hover:text-slate-300 transition">Design Tokens</a>
+        <a href="#live" class="hover:text-slate-300 transition">Componentes ao vivo</a>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<!-- Toast Box for Alerts -->
+<div id="toast-notify" class="toast">
+  <iconify-icon icon="solar:check-circle-linear" width="16" class="text-cyan-300"></iconify-icon>
+  <span id="toast-message">Copiado com sucesso!</span>
+</div>
+
+<!-- Raw Component Codes (Hidden repository for copying) -->
+<div class="hidden">
+  <textarea id="code-repo-btn-primary"><!-- Botão Primário Cyan -->
+<button class="group inline-flex items-center justify-center gap-2 text-sm font-semibold text-slate-950 bg-cyan-100 rounded-full px-5 py-2.5 transition duration-300 hover:scale-[1.03] hover:bg-cyan-50 shadow-lg shadow-cyan-950/20 font-geist">
+  Iniciar grátis
+  <iconify-icon class="transition duration-300 group-hover:translate-x-0.5" icon="solar:arrow-right-linear" width="16"></iconify-icon>
+</button></textarea>
+
+  <textarea id="code-repo-btn-secondary"><!-- Botão Secundário Outline -->
+<button class="inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-5 py-2.5 text-sm font-medium text-slate-200 transition duration-300 hover:scale-[1.02] hover:border-white/[0.18] hover:bg-white/[0.07] font-geist">
+  Ver demo
+  <iconify-icon icon="solar:checklist-minimalistic-linear" width="16"></iconify-icon>
+</button></textarea>
+
+  <textarea id="code-repo-btn-icon"><!-- Botão Circular Icon Only -->
+<button class="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition hover:bg-white/[0.08] hover:text-white">
+  <iconify-icon icon="solar:hamburger-menu-linear" width="18"></iconify-icon>
+</button></textarea>
+
+  <textarea id="code-repo-badge-high"><!-- Badge Alta Prioridade -->
+<span class="inline-flex rounded-full bg-cyan-400/[0.15] px-2.5 py-1 text-[10px] font-semibold text-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.15)] font-geist">
+  Alta
+</span></textarea>
+
+  <textarea id="code-repo-glass-card"><!-- Card Glassmorphism -->
+<div class="group relative rounded-3xl border border-white/[0.12] bg-slate-950/75 p-6 shadow-2xl backdrop-blur-xl transition duration-500 hover:border-cyan-200/30 overflow-hidden">
+  <div aria-hidden="true" class="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.05] blur-[60px] pointer-events-none"></div>
+  <div class="relative z-10 space-y-4">
+    <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+      <p class="text-xs text-slate-400 font-geist">Workspace</p>
+      <span class="flex items-center gap-1 text-[10px] text-slate-500 font-geist">Ativo</span>
+    </div>
+    <h4 class="text-base font-semibold text-white font-geist">Finalizar onboarding</h4>
+    <p class="text-xs text-slate-400 leading-relaxed font-geist">Descrição simplificada da tarefa.</p>
+  </div>
+</div></textarea>
+</div>
+
+<!-- Interactive JavaScript logic -->
+<script>
+  // Toast helper
+  function copyText(text, message = 'Copiado para a área de transferência!') {
+    navigator.clipboard.writeText(text).then(() => {
+      const toast = document.getElementById('toast-notify');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.innerText = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    });
+  }
+
+  // Copy component codes directly from hidden textareas
+  function copyComponentCode(componentId) {
+    const rawCode = document.getElementById('code-repo-' + componentId).value;
+    copyText(rawCode, 'Código do componente copiado!');
+  }
+
+  // Interactive Code Center selectors
+  let selectedComponent = 'btn-primary';
+  function selectCodeComponent(componentId) {
+    selectedComponent = componentId;
+    
+    // Reset selections
+    document.querySelectorAll('.code-select-btn').forEach(btn => {
+      btn.classList.remove('border-cyan-400/20', 'bg-cyan-400/10', 'text-cyan-300');
+      btn.classList.add('border-white/10', 'bg-white/[0.04]', 'text-slate-400');
+    });
+    
+    // Set active button style
+    const activeBtn = document.getElementById(componentId + '-sel');
+    activeBtn.classList.remove('border-white/10', 'bg-white/[0.04]', 'text-slate-400');
+    activeBtn.classList.add('border-cyan-400/20', 'bg-cyan-400/10', 'text-cyan-300');
+    
+    // Update pre formatted content
+    const codeContent = document.getElementById('code-repo-' + componentId).value;
+    // escape HTML for visual pre render
+    const escapedCode = codeContent.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    document.getElementById('code-content').innerHTML = escapedCode;
+  }
+
+  function copyCurrentComponentCode() {
+    copyComponentCode(selectedComponent);
+  }
+
+  // Interactive Task List Data Model
+  let tasks = [
+    { id: 1, text: 'Finalizar design do cabeçalho', priority: 'Alta', done: false },
+    { id: 2, text: 'Otimizar scripts de carregamento', priority: 'Normal', done: false },
+    { id: 3, text: 'Corrigir bugs do timeline responsivo', priority: 'Pronta', done: true }
+  ];
+
+  function renderTasks() {
+    const listElement = document.getElementById('live-task-list');
+    listElement.innerHTML = '';
+    
+    let doneCount = 0;
+    
+    tasks.forEach(task => {
+      if (task.done) doneCount++;
+      
+      const taskDiv = document.createElement('div');
+      taskDiv.className = `flex items-center justify-between gap-3 p-3 rounded-xl border transition-all ${
+        task.done 
+          ? 'border-white/[0.03] bg-white/[0.01] opacity-60' 
+          : task.priority === 'Alta' 
+            ? 'border-cyan-200/10 bg-cyan-400/[0.03]' 
+            : 'border-white/[0.06] bg-white/[0.02]'
+      }`;
+      
+      // Build badge style
+      let badgeClass = 'bg-white/[0.08] text-slate-300';
+      if (task.priority === 'Alta') badgeClass = 'bg-cyan-400/[0.15] text-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.15)]';
+      if (task.priority === 'Pronta') badgeClass = 'bg-emerald-400/[0.12] text-emerald-300';
+      if (task.priority === 'Atrasada') badgeClass = 'bg-rose-400/[0.12] text-rose-300';
+
+      taskDiv.innerHTML = `
+        <div class="flex items-center gap-3">
+          <input type="checkbox" onchange="toggleTask(${task.id})" ${task.done ? 'checked' : ''} class="h-4 w-4 rounded border-white/20 bg-black/20 text-cyan-500 focus:ring-0 focus:ring-offset-0 cursor-pointer"/>
+          <span class="text-xs font-geist task-text ${task.done ? 'line-through text-slate-500' : 'text-slate-200'}">${task.text}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="rounded-full px-2 py-0.5 text-[9px] font-semibold font-geist ${badgeClass}">${task.priority}</span>
+          <button onclick="deleteTask(${task.id})" class="text-slate-600 hover:text-rose-400 transition ml-1"><iconify-icon icon="solar:trash-bin-trash-linear" width="14"></iconify-icon></button>
+        </div>
+      `;
+      listElement.appendChild(taskDiv);
+    });
+
+    // Update stats counters
+    document.getElementById('live-task-counter').innerText = `${tasks.length} tarefa${tasks.length !== 1 ? 's' : ''}`;
+    document.getElementById('live-done-count').innerText = doneCount;
+    
+    // Calculate progress (health percent)
+    let percent = tasks.length > 0 ? Math.round((doneCount / tasks.length) * 100) : 0;
+    document.getElementById('live-health-percent').innerText = `${percent}%`;
+  }
+
+  function toggleTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+      task.done = !task.done;
+      renderTasks();
+    }
+  }
+
+  function deleteTask(id) {
+    tasks = tasks.filter(t => t.id !== id);
+    renderTasks();
+  }
+
+  function addTask() {
+    const input = document.getElementById('task-input');
+    const prioritySelect = document.getElementById('task-priority');
+    
+    if (!input.value.trim()) return;
+
+    const newTask = {
+      id: Date.now(),
+      text: input.value.trim(),
+      priority: prioritySelect.value,
+      done: false
+    };
+
+    tasks.push(newTask);
+    input.value = '';
+    renderTasks();
+  }
+
+  // Active section tracker on scroll for sidebar navigation links
+  window.addEventListener('DOMContentLoaded', () => {
+    renderTasks(); // Initial rendering of dynamic tasks list
+    
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-link-item');
+    
+    window.addEventListener('scroll', () => {
+      let current = 'overview';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navItems.forEach(item => {
+        item.classList.remove('bg-cyan-400/[0.08]', 'border-cyan-400/10', 'text-cyan-200', 'font-semibold');
+        item.classList.add('text-slate-400');
+        if (item.getAttribute('data-section') === current) {
+          item.classList.remove('text-slate-400');
+          item.classList.add('bg-cyan-400/[0.08]', 'border-cyan-400/10', 'text-cyan-200', 'font-semibold');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
