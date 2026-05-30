@@ -739,6 +739,119 @@
     font-size: 14px;
     color: var(--dim);
   }
+
+  /* DEPOIMENTOS */
+  .depo-inner { max-width: 1100px; margin: 0 auto; }
+  .video-main { display: flex; gap: 40px; align-items: center; margin-bottom: 40px; }
+  .video-player {
+    width: 520px; height: 340px; border-radius: 16px; overflow: hidden;
+    position: relative; background: rgba(15,21,36,0.5); flex-shrink: 0;
+    border: 1px solid var(--card-border);
+  }
+  .video-player video { width: 100%; height: 100%; object-fit: cover; }
+  .play-overlay {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.3); cursor: pointer; transition: background 0.3s;
+  }
+  .play-overlay:hover { background: rgba(0,0,0,0.2); }
+  .play-btn-dep {
+    width: 64px; height: 64px; border-radius: 50%; background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s;
+  }
+  .play-overlay:hover .play-btn-dep { transform: scale(1.08); }
+  .video-info-dep { flex: 1; }
+  .tag-dep { font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .video-info-dep blockquote { font-size: 16px; font-weight: 300; line-height: 1.8; color: var(--dim); margin-bottom: 16px; font-style: italic; }
+  .video-info-dep cite { font-size: 16px; font-weight: 500; font-style: normal; color: var(--white); display: block; margin-bottom: 4px; }
+  .trat-dep { font-size: 13px; color: var(--text-muted); }
+  .video-dots-dep { display: flex; gap: 8px; margin-top: 16px; }
+  .video-dots-dep span {
+    height: 8px; border-radius: 4px; transition: all 0.3s; cursor: pointer;
+  }
+  .video-dots-dep .active { width: 24px; background: var(--accent); }
+  .video-dots-dep .inactive { width: 8px; background: rgba(255,255,255,0.15); }
+  .thumbs-header-dep {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+  }
+  .thumbs-header-dep h3 { font-size: 13px; font-weight: 500; color: var(--dim); letter-spacing: 1px; }
+  .thumbs-arrows-dep { display: flex; gap: 8px; }
+  .thumbs-arrows-dep button {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid var(--card-border); background: none; color: var(--dim);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: 0.2s; font-size: 16px;
+  }
+  .thumbs-arrows-dep button:last-child { background: var(--accent); border-color: var(--accent); }
+  .thumbs-arrows-dep button:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
+  .thumbs-grid-dep { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .thumb-card-dep {
+    border-radius: 12px; overflow: hidden; background: rgba(15,21,36,0.5);
+    border: 1px solid var(--card-border); cursor: pointer; transition: border-color 0.2s;
+  }
+  .thumb-card-dep:hover { border-color: var(--accent); }
+  .thumb-video-dep {
+    position: relative; height: 140px; background: rgba(15,21,36,0.3);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .thumb-video-dep video { width: 100%; height: 100%; object-fit: cover; }
+  .thumb-play-dep {
+    position: absolute; width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(56,189,248,0.8); display: flex; align-items: center; justify-content: center;
+  }
+  .thumb-duration-dep {
+    position: absolute; right: 8px; bottom: 8px; padding: 4px 8px;
+    background: rgba(0,0,0,0.7); border-radius: 4px;
+    font-size: 10px; font-weight: 500; color: #fff;
+  }
+  .thumb-info-dep { padding: 12px 14px; }
+  .thumb-info-dep h4 { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .thumb-info-dep p { font-size: 12px; font-weight: 300; color: var(--dim); }
+
+  /* RELATOS */
+  .relato-slider {
+    position: relative; max-width: 400px; margin: 0 auto;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .relato-slider-inner {
+    flex: 1; border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--card-border); background: rgba(15,21,36,0.5);
+    aspect-ratio: 9/16; max-height: 500px;
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  .relato-slider-inner img {
+    width: 100%; height: 100%; object-fit: contain; display: block; transition: opacity 0.3s;
+  }
+  .relato-counter {
+    position: absolute; bottom: 16px; right: 16px; padding: 6px 14px;
+    background: rgba(0,0,0,0.7); border-radius: 20px;
+    font-size: 12px; color: #fff; font-weight: 500;
+  }
+  .relato-arrow {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(15,21,36,0.5); border: 1px solid var(--card-border);
+    color: var(--dim); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; transition: 0.2s; flex-shrink: 0;
+  }
+  .relato-arrow:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
+  .relato-dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+  .relato-dots span {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.2); cursor: pointer; transition: 0.3s;
+  }
+  .relato-dots span.active { background: var(--accent); width: 24px; border-radius: 4px; }
+
+  @media (max-width: 768px) {
+    .video-main { flex-direction: column; }
+    .video-player { width: 100%; }
+    .thumbs-grid-dep { grid-template-columns: 1fr 1fr; }
+    .relato-slider { max-width: 100%; }
+    .relato-arrow { width: 36px; height: 36px; font-size: 16px; }
+  }
+  @media (max-width: 480px) {
+    .thumbs-grid-dep { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -1117,6 +1230,61 @@
   </div>
 </section>
 
+<!-- DEPOIMENTOS EM VÍDEO -->
+<section class="sec" id="depoimentos">
+  <div class="sec-label">Resultados reais</div>
+  <h2>Depoimentos de quem<br><em>recuperou</em> <strong>o movimento.</strong></h2>
+  <p class="sec-body">Veja histórias reais de pacientes que passaram pelo Protocolo 5R e voltaram a viver sem dor.</p>
+
+  <div class="depo-inner">
+    <div class="video-main">
+      <div class="video-player">
+        <video id="mainVideo" playsinline>
+          <source src="lv_0_20250717133315.mp4" type="video/mp4">
+        </video>
+        <div class="play-overlay" id="playOverlay" onclick="togglePlay()">
+          <div class="play-btn-dep">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="video-info-dep">
+        <p class="tag-dep" id="vTag">DEPOIMENTO EM DESTAQUE</p>
+        <blockquote id="vQuote">"Há 3 anos sentia dor no joelho que me impedia de subir escadas. Após 4 meses com o Dr. Bruno, voltei a caminhar sem dor. O Protocolo 5R mudou minha vida."</blockquote>
+        <cite id="vCite">Maria Clara S., 58 anos</cite>
+        <p class="trat-dep" id="vTrat">Tratamento: Protocolo 5R para artrose de joelho</p>
+        <div class="video-dots-dep" id="videoDots"></div>
+      </div>
+    </div>
+
+    <div class="thumbs-header-dep">
+      <h3>Mais depoimentos</h3>
+      <div class="thumbs-arrows-dep">
+        <button onclick="prevVideo()">&#8249;</button>
+        <button onclick="nextVideo()">&#8250;</button>
+      </div>
+    </div>
+    <div class="thumbs-grid-dep" id="thumbsGrid"></div>
+  </div>
+</section>
+
+<!-- RELATOS DE PACIENTES -->
+<section class="sec sec-alt" id="relatos">
+  <div class="sec-label">Provas visuais</div>
+  <h2>Relatos <em>reais</em> de<br><strong>pacientes.</strong></h2>
+  <p class="sec-body">Resultados de quem confiou no tratamento. Imagens reais de evolução.</p>
+
+  <div class="relato-slider">
+    <button class="relato-arrow" onclick="prevRelato()">&#8249;</button>
+    <div class="relato-slider-inner">
+      <img id="relatoImg" src="IMG_6858.PNG" alt="Relato de paciente">
+      <span class="relato-counter" id="relatoCounter">1 / 5</span>
+    </div>
+    <button class="relato-arrow" onclick="nextRelato()">&#8250;</button>
+  </div>
+  <div class="relato-dots" id="relatoDots"></div>
+</section>
+
 <!-- CTA -->
 <section class="cta-sec" id="entrar">
   <h2>Pronto para <em>se mover</em><br><strong>sem dor?</strong></h2>
@@ -1407,6 +1575,121 @@
     stackObserver.observe(item);
   });
 })();
+
+// DEPOIMENTOS - Video Player
+const depVideos = [
+  {
+    src: "lv_0_20250717133315.mp4",
+    tag: "DEPOIMENTO EM DESTAQUE",
+    quote: '"Há 3 anos sentia dor no joelho que me impedia de subir escadas. Após 4 meses com o Dr. Bruno, voltei a caminhar sem dor. O Protocolo 5R mudou minha vida."',
+    name: "Maria Clara S., 58 anos",
+    trat: "Tratamento: Protocolo 5R para artrose de joelho",
+    dur: "4:02"
+  },
+  {
+    src: "lv_0_20250717133315.mp4",
+    tag: "DEPOIMENTO",
+    quote: '"Diagnosticada com artrose no quadril, achava que precisaria de cirurgia. Com o tratamento conservador do Dr. Bruno, estou há 1 ano sem dores intensas."',
+    name: "Rosa Helena M., 63 anos",
+    trat: "Tratamento: Artrose de quadril",
+    dur: "5:20"
+  }
+];
+
+let depIndex = 0;
+const depMainVideo = document.getElementById('mainVideo');
+const depOverlay = document.getElementById('playOverlay');
+const depVTag = document.getElementById('vTag');
+const depVQuote = document.getElementById('vQuote');
+const depVCite = document.getElementById('vCite');
+const depVTrat = document.getElementById('vTrat');
+const depDots = document.getElementById('videoDots');
+const depThumbs = document.getElementById('thumbsGrid');
+
+if (depDots) {
+  depVideos.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = i === 0 ? 'active' : 'inactive';
+    dot.onclick = () => selectDepVideo(i);
+    depDots.appendChild(dot);
+  });
+}
+
+if (depThumbs) {
+  depVideos.forEach((v, i) => {
+    const card = document.createElement('div');
+    card.className = 'thumb-card-dep';
+    card.onclick = () => selectDepVideo(i);
+    card.innerHTML = `
+      <div class="thumb-video-dep">
+        <div class="thumb-play-dep">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="thumb-duration-dep">${v.dur}</div>
+      </div>
+      <div class="thumb-info-dep">
+        <h4>${v.name.split(',')[0]}</h4>
+        <p>${v.trat}</p>
+      </div>
+    `;
+    depThumbs.appendChild(card);
+  });
+}
+
+function selectDepVideo(i) {
+  depIndex = i;
+  const v = depVideos[i];
+  depMainVideo.src = v.src;
+  depMainVideo.load();
+  depVTag.textContent = v.tag;
+  depVQuote.textContent = v.quote;
+  depVCite.textContent = v.name;
+  depVTrat.textContent = v.trat;
+  depOverlay.style.display = 'flex';
+  document.querySelectorAll('.video-dots-dep span').forEach((d, j) => {
+    d.className = j === i ? 'active' : 'inactive';
+  });
+}
+
+function togglePlay() {
+  if (depMainVideo.paused) {
+    depMainVideo.play();
+    depOverlay.style.display = 'none';
+  } else {
+    depMainVideo.pause();
+    depOverlay.style.display = 'flex';
+  }
+}
+
+function nextVideo() { selectDepVideo((depIndex + 1) % depVideos.length); }
+function prevVideo() { selectDepVideo((depIndex - 1 + depVideos.length) % depVideos.length); }
+
+// RELATOS - Carousel
+const relatos = ["IMG_6858.PNG", "IMG_6859.PNG", "IMG_6860.PNG", "IMG_6861.PNG", "IMG_6862.PNG"];
+let relatoIndex = 0;
+const relatoImg = document.getElementById('relatoImg');
+const relatoCounter = document.getElementById('relatoCounter');
+const relatoDots = document.getElementById('relatoDots');
+
+if (relatoDots) {
+  relatos.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = i === 0 ? 'active' : '';
+    dot.onclick = () => selectRelato(i);
+    relatoDots.appendChild(dot);
+  });
+}
+
+function selectRelato(i) {
+  relatoIndex = i;
+  if (relatoImg) relatoImg.src = relatos[i];
+  if (relatoCounter) relatoCounter.textContent = (i + 1) + ' / ' + relatos.length;
+  document.querySelectorAll('.relato-dots span').forEach((d, j) => {
+    d.className = j === i ? 'active' : '';
+  });
+}
+function nextRelato() { selectRelato((relatoIndex + 1) % relatos.length); }
+function prevRelato() { selectRelato((relatoIndex - 1 + relatos.length) % relatos.length); }
 </script>
 </body>
 </html>
