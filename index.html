@@ -1277,7 +1277,7 @@
   <div class="relato-slider">
     <button class="relato-arrow" onclick="prevRelato()">&#8249;</button>
     <div class="relato-slider-inner">
-      <img id="relatoImg" src="IMG_6858.PNG" alt="Relato de paciente">
+      <img id="relatoImg" src="https://drbrunomachado.vercel.app/IMG_6858.PNG" alt="Relato de paciente">
       <span class="relato-counter" id="relatoCounter">1 / 5</span>
     </div>
     <button class="relato-arrow" onclick="nextRelato()">&#8250;</button>
@@ -1667,7 +1667,13 @@ function nextVideo() { selectDepVideo((depIndex + 1) % depVideos.length); }
 function prevVideo() { selectDepVideo((depIndex - 1 + depVideos.length) % depVideos.length); }
 
 // RELATOS - Carousel
-const relatos = ["IMG_6858.PNG", "IMG_6859.PNG", "IMG_6860.PNG", "IMG_6861.PNG", "IMG_6862.PNG"];
+const relatos = [
+  "https://drbrunomachado.vercel.app/IMG_6858.PNG",
+  "https://drbrunomachado.vercel.app/IMG_6859.PNG",
+  "https://drbrunomachado.vercel.app/IMG_6860.PNG",
+  "https://drbrunomachado.vercel.app/IMG_6861.PNG",
+  "https://drbrunomachado.vercel.app/IMG_6862.PNG"
+];
 let relatoIndex = 0;
 const relatoImg = document.getElementById('relatoImg');
 const relatoCounter = document.getElementById('relatoCounter');
