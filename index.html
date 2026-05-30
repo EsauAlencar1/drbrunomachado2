@@ -1116,6 +1116,9 @@
   </div>
 </section>
 
+<!-- Iframe oculto para envio ao Google Sheets -->
+<iframe name="hidden_iframe" style="display:none"></iframe>
+
 <!-- Modal Formulário -->
 <div id="formModal" class="modal">
   <div class="modal-content">
@@ -1283,7 +1286,7 @@
   // Envio do formulário
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4F2RRX3bZhyUzxxAR06rJ3ZdgyFruVkzEi9CG3gVZrqmNSz3emS8mBhRpZ77IQGZE/exec';
 
-  async function submitForm(e) {
+  function submitForm(e) {
     e.preventDefault();
     
     const nome = document.getElementById('nome').value;
@@ -1300,16 +1303,25 @@
     });
     localStorage.setItem('leads', JSON.stringify(leads));
     
-    // Enviar para Google Sheets
-    try {
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = `${SCRIPT_URL}?nome=${encodeURIComponent(nome)}&cidade=${encodeURIComponent(cidade)}&whatsapp=${encodeURIComponent(whatsapp)}`;
-      document.body.appendChild(iframe);
-      setTimeout(() => iframe.remove(), 5000);
-    } catch (err) {
-      console.warn('Erro ao salvar na planilha:', err);
-    }
+    // Enviar via form oculto (bypass CORS)
+    const form = document.createElement('form');
+    form.method = 'GET';
+    form.action = SCRIPT_URL;
+    form.target = 'hidden_iframe';
+    
+    const p1 = document.createElement('input');
+    p1.type = 'hidden'; p1.name = 'nome'; p1.value = nome;
+    const p2 = document.createElement('input');
+    p2.type = 'hidden'; p2.name = 'cidade'; p2.value = cidade;
+    const p3 = document.createElement('input');
+    p3.type = 'hidden'; p3.name = 'whatsapp'; p3.value = whatsapp;
+    
+    form.appendChild(p1);
+    form.appendChild(p2);
+    form.appendChild(p3);
+    document.body.appendChild(form);
+    form.submit();
+    form.remove();
     
     // Mostrar sucesso
     document.getElementById('leadForm').style.display = 'none';
