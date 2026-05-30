@@ -1240,7 +1240,7 @@
     <div class="video-main">
       <div class="video-player">
         <video id="mainVideo" playsinline>
-          <source src="lv_0_20250717133315.mp4" type="video/mp4">
+          <source src="https://drbrunomachado.vercel.app/lv_0_20250717133315.mp4" type="video/mp4">
         </video>
         <div class="play-overlay" id="playOverlay" onclick="togglePlay()">
           <div class="play-btn-dep">
@@ -1579,7 +1579,7 @@
 // DEPOIMENTOS - Video Player
 const depVideos = [
   {
-    src: "lv_0_20250717133315.mp4",
+    src: "https://drbrunomachado.vercel.app/lv_0_20250717133315.mp4",
     tag: "DEPOIMENTO EM DESTAQUE",
     quote: '"Há 3 anos sentia dor no joelho que me impedia de subir escadas. Após 4 meses com o Dr. Bruno, voltei a caminhar sem dor. O Protocolo 5R mudou minha vida."',
     name: "Maria Clara S., 58 anos",
@@ -1587,7 +1587,7 @@ const depVideos = [
     dur: "4:02"
   },
   {
-    src: "lv_0_20250717133315.mp4",
+    src: "https://drbrunomachado.vercel.app/lv_0_20250717133315.mp4",
     tag: "DEPOIMENTO",
     quote: '"Diagnosticada com artrose no quadril, achava que precisaria de cirurgia. Com o tratamento conservador do Dr. Bruno, estou há 1 ano sem dores intensas."',
     name: "Rosa Helena M., 63 anos",
@@ -1649,6 +1649,8 @@ function selectDepVideo(i) {
   document.querySelectorAll('.video-dots-dep span').forEach((d, j) => {
     d.className = j === i ? 'active' : 'inactive';
   });
+  // Scroll to video player
+  document.querySelector('.video-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function togglePlay() {
