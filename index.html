@@ -1302,7 +1302,9 @@
     
     // Enviar para Google Sheets
     try {
-      await fetch(`${SCRIPT_URL}?nome=${encodeURIComponent(nome)}&cidade=${encodeURIComponent(cidade)}&whatsapp=${encodeURIComponent(whatsapp)}`);
+      await fetch(`${SCRIPT_URL}?nome=${encodeURIComponent(nome)}&cidade=${encodeURIComponent(cidade)}&whatsapp=${encodeURIComponent(whatsapp)}`, {
+        mode: 'no-cors'
+      });
     } catch (err) {
       console.warn('Erro ao salvar na planilha:', err);
     }
