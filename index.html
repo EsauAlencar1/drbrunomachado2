@@ -391,11 +391,11 @@
   }
 
   /* PROTOCOLO R5 GRID */
-  .r5-grid { display:grid; grid-template-columns: repeat(5, 1fr); gap:16px; margin-top:40px; width: 100%; max-width: 1100px; }
+  .r5-grid { display:flex; flex-direction:column; gap:0; margin-top:40px; width: 100%; max-width: 700px; margin-left:auto; margin-right:auto; padding-bottom:60px; }
   .r-card {
-    position: relative;
+    position: sticky;
     overflow: hidden;
-    background: rgba(255,255,255,0.035);
+    background: rgba(15,21,36,0.85);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 24px;
     padding: 36px 24px 32px; text-align:center;
@@ -404,7 +404,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    backdrop-filter: blur(12px);
   }
+  .r-card:nth-child(1) { top: 80px; z-index: 1; }
+  .r-card:nth-child(2) { top: 90px; z-index: 2; }
+  .r-card:nth-child(3) { top: 100px; z-index: 3; }
+  .r-card:nth-child(4) { top: 110px; z-index: 4; }
+  .r-card:nth-child(5) { top: 120px; z-index: 5; }
   .r-card::before {
     content: '';
     position: absolute;
@@ -1337,7 +1343,7 @@
 <!-- SCROLL-REVEAL — igual ao design system de referência (reveal-and-parallax.js) -->
 <script>
 (function() {
-  const reveals = document.querySelectorAll(".sec, .r-card, .mod, .video-item");
+  const reveals = document.querySelectorAll(".sec, .mod, .video-item");
   const textNodes = document.querySelectorAll(
     "main section :is(h2, h3, h4, p, .sec-label, .eyebrow), footer :is(h2, p)"
   );
@@ -1364,6 +1370,34 @@
   }, { threshold: 0.1 });
 
   all.forEach(el => obs.observe(el));
+
+  // Stacking cards animation — escala e opacidade ao empilhar
+  const cards = document.querySelectorAll('.r-card');
+  const cardObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const idx = Array.from(cards).indexOf(entry.target);
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'scale(1)';
+      } else {
+        const rect = entry.boundingClientRect;
+        if (rect.top < 0) {
+          entry.target.style.opacity = '0';
+          entry.target.style.transform = 'scale(0.95)';
+        } else {
+          entry.target.style.opacity = '0';
+          entry.target.style.transform = 'translateY(30px)';
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+
+  cards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    cardObserver.observe(card);
+  });
 })();
 </script>
 </body>
