@@ -293,15 +293,10 @@
     transform: translateY(-4px);
     box-shadow: 0 0 0 1px rgba(56,189,248,0.18), 0 0 46px rgba(56,189,248,0.12), 0 22px 70px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.12);
   }
-  .mod:hover {
-    border-color: rgba(56, 189, 248, 0.25);
-    background: rgba(15, 21, 36, 0.85);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  }
   .mod-header {
     display:flex; align-items:center; justify-content:space-between;
     padding: 24px 32px;
+    text-align: left;
   }
   .mod-left { display:flex; align-items:center; gap:20px; }
   .mod-num {
@@ -328,21 +323,23 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    text-align: left;
   }
   .mod.open .mod-content {
     height: auto; padding-bottom: 32px; opacity: 1;
   }
   .mod-desc {
     font-size:15px; line-height:1.7; color:var(--dim);
-    margin-bottom:24px; padding-left: 56px;
+    margin-bottom:24px; padding-left: 0;
+    text-align: left;
   }
   .video-item {
     position: relative;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
     gap: 16px;
     padding: 24px;
     background: rgba(255,255,255,0.025);
@@ -394,8 +391,8 @@
   .video-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     gap: 10px;
     flex-grow: 1;
     width: 100%;
