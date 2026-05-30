@@ -1410,8 +1410,8 @@
 
   all.forEach(el => obs.observe(el));
 
-  // Stacking cards animation — sync com hierarquia dos toggles
-  const stackItems = document.querySelectorAll('.r-card, .mod');
+  // Stacking cards animation — escala e opacidade ao empilhar (apenas em vídeos internos)
+  const stackItems = document.querySelectorAll('.video-item');
   const stackObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       const idx = Array.from(stackItems).indexOf(entry.target);
@@ -1429,6 +1429,14 @@
         }
       }
     });
+  }, { threshold: [0, 0.2, 0.5, 0.8, 1] });
+
+  stackItems.forEach((item, i) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(30px)';
+    item.style.transition = `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${i * 60}ms, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${i * 60}ms`;
+    stackObserver.observe(item);
+  });
   }, { threshold: [0, 0.2, 0.5, 0.8, 1] });
 
   stackItems.forEach((item, i) => {
