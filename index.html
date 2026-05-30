@@ -1281,7 +1281,9 @@
   });
 
   // Envio do formulário
-  function submitForm(e) {
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4F2RRX3bZhyUzxxAR06rJ3ZdgyFruVkzEi9CG3gVZrqmNSz3emS8mBhRpZ77IQGZE/exec';
+
+  async function submitForm(e) {
     e.preventDefault();
     
     const nome = document.getElementById('nome').value;
@@ -1297,6 +1299,13 @@
       data: new Date().toLocaleString('pt-BR')
     });
     localStorage.setItem('leads', JSON.stringify(leads));
+    
+    // Enviar para Google Sheets
+    try {
+      await fetch(`${SCRIPT_URL}?nome=${encodeURIComponent(nome)}&cidade=${encodeURIComponent(cidade)}&whatsapp=${encodeURIComponent(whatsapp)}`);
+    } catch (err) {
+      console.warn('Erro ao salvar na planilha:', err);
+    }
     
     // Mostrar sucesso
     document.getElementById('leadForm').style.display = 'none';
