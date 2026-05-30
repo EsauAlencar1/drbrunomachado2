@@ -1302,7 +1302,11 @@
     
     // Enviar para Google Sheets
     try {
-      new Image().src = `${SCRIPT_URL}?nome=${encodeURIComponent(nome)}&cidade=${encodeURIComponent(cidade)}&whatsapp=${encodeURIComponent(whatsapp)}`;
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = `${SCRIPT_URL}?nome=${encodeURIComponent(nome)}&cidade=${encodeURIComponent(cidade)}&whatsapp=${encodeURIComponent(whatsapp)}`;
+      document.body.appendChild(iframe);
+      setTimeout(() => iframe.remove(), 5000);
     } catch (err) {
       console.warn('Erro ao salvar na planilha:', err);
     }
