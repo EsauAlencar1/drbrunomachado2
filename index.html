@@ -247,15 +247,22 @@
   .sec-body strong { color:var(--white); font-weight:500; }
 
   /* ACCORDION (MODULOS) */
-  .modulos-grid { display:flex; flex-direction:column; gap:16px; width: 100%; max-width:960px; margin: 0 auto; text-align: left; }
+  .modulos-grid { display:flex; flex-direction:column; gap:0; width: 100%; max-width:960px; margin: 0 auto; text-align: left; padding-bottom:60px; }
   .mod {
-    background: var(--card-bg);
+    position: sticky;
+    background: rgba(15,21,36,0.88);
     border: 1px solid var(--card-border);
     border-radius: 16px;
     overflow:hidden; cursor:pointer;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
   }
+  .mod:nth-child(1) { top: 80px; z-index: 1; }
+  .mod:nth-child(2) { top: 90px; z-index: 2; }
+  .mod:nth-child(3) { top: 100px; z-index: 3; }
+  .mod:nth-child(4) { top: 110px; z-index: 4; }
+  .mod:nth-child(5) { top: 120px; z-index: 5; }
   .mod:hover {
     border-color: rgba(56, 189, 248, 0.25);
     background: rgba(15, 21, 36, 0.85);
@@ -1372,10 +1379,9 @@
   all.forEach(el => obs.observe(el));
 
   // Stacking cards animation — escala e opacidade ao empilhar
-  const cards = document.querySelectorAll('.r-card');
-  const cardObserver = new IntersectionObserver(entries => {
+  const stackItems = document.querySelectorAll('.r-card, .mod');
+  const stackObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      const idx = Array.from(cards).indexOf(entry.target);
       if (entry.isIntersecting) {
         entry.target.style.opacity = '1';
         entry.target.style.transform = 'scale(1)';
@@ -1392,11 +1398,11 @@
     });
   }, { threshold: 0.3 });
 
-  cards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    cardObserver.observe(card);
+  stackItems.forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(30px)';
+    item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    stackObserver.observe(item);
   });
 })();
 </script>
