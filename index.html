@@ -1387,43 +1387,26 @@
   </div>
 </section>
 
-<!-- RELATOS DE PACIENTES -->
+<!-- RELATOS E AVALIAÇÕES -->
 <section class="sec sec-alt" id="relatos">
-  <div class="sec-label">Provas visuais</div>
-  <h2>Relatos <em>reais</em> de<br><strong>pacientes.</strong></h2>
-  <p class="sec-body">Resultados de quem confiou no tratamento. Imagens reais de evolução.</p>
-
-  <div class="relato-slider">
-    <button class="relato-arrow" onclick="prevRelato()">&#8249;</button>
-    <div class="relato-slider-inner">
-      <img id="relatoImg" src="https://drbrunomachado.vercel.app/IMG_6858.PNG" alt="Relato de paciente">
-      <span class="relato-counter" id="relatoCounter">1 / 5</span>
-    </div>
-    <button class="relato-arrow" onclick="nextRelato()">&#8250;</button>
-  </div>
-  <div class="relato-dots" id="relatoDots"></div>
-</section>
-
-<!-- AVALIAÇÕES -->
-<section class="sec sec-alt" id="avaliacoes">
-  <div class="sec-label">Avaliações</div>
-  <h2>Avaliações de <em>quem</em> <strong>se recuperou.</strong></h2>
-  <p class="sec-body">Resultados reais de pacientes que passaram pelo tratamento.</p>
+  <div class="sec-label">Resultados reais</div>
+  <h2>Relatos <em>e</em> avaliações <strong>de pacientes.</strong></h2>
+  <p class="sec-body">Veja as imagens e vídeos de quem passou pelo tratamento e recuperou sua qualidade de vida.</p>
 
   <div class="avaliacoes-grid">
     <!-- Coluna Esquerda: Imagens -->
     <div class="avaliacoes-col">
       <div class="avaliacao-card avaliacao-img">
         <img src="1.jpeg" alt="Avaliação 1">
-        <span class="avaliacao-badge">Imagem</span>
+        <span class="avaliacao-badge">Antes e depois</span>
       </div>
       <div class="avaliacao-card avaliacao-img">
         <img src="2.jpeg" alt="Avaliação 2">
-        <span class="avaliacao-badge">Imagem</span>
+        <span class="avaliacao-badge">Evolução</span>
       </div>
       <div class="avaliacao-card avaliacao-img">
         <img src="3.jpeg" alt="Avaliação 3">
-        <span class="avaliacao-badge">Imagem</span>
+        <span class="avaliacao-badge">Resultado</span>
       </div>
     </div>
     
@@ -1440,7 +1423,7 @@
             </svg>
           </div>
         </div>
-        <span class="avaliacao-badge avaliacao-badge-video">Vídeo</span>
+        <span class="avaliacao-badge avaliacao-badge-video">Depoimento</span>
       </div>
       <div class="avaliacao-card avaliacao-video">
         <video playsinline>
@@ -1453,7 +1436,7 @@
             </svg>
           </div>
         </div>
-        <span class="avaliacao-badge avaliacao-badge-video">Vídeo</span>
+        <span class="avaliacao-badge avaliacao-badge-video">Depoimento</span>
       </div>
     </div>
   </div>
@@ -1851,39 +1834,6 @@ function togglePlay() {
 
 function nextVideo() { selectDepVideo((depIndex + 1) % depVideos.length); }
 function prevVideo() { selectDepVideo((depIndex - 1 + depVideos.length) % depVideos.length); }
-
-// RELATOS - Carousel
-const relatos = [
-  "https://drbrunomachado.vercel.app/IMG_6858.PNG",
-  "https://drbrunomachado.vercel.app/IMG_6859.PNG",
-  "https://drbrunomachado.vercel.app/IMG_6860.PNG",
-  "https://drbrunomachado.vercel.app/IMG_6861.PNG",
-  "https://drbrunomachado.vercel.app/IMG_6862.PNG"
-];
-let relatoIndex = 0;
-const relatoImg = document.getElementById('relatoImg');
-const relatoCounter = document.getElementById('relatoCounter');
-const relatoDots = document.getElementById('relatoDots');
-
-if (relatoDots) {
-  relatos.forEach((_, i) => {
-    const dot = document.createElement('span');
-    dot.className = i === 0 ? 'active' : '';
-    dot.onclick = () => selectRelato(i);
-    relatoDots.appendChild(dot);
-  });
-}
-
-function selectRelato(i) {
-  relatoIndex = i;
-  if (relatoImg) relatoImg.src = relatos[i];
-  if (relatoCounter) relatoCounter.textContent = (i + 1) + ' / ' + relatos.length;
-  document.querySelectorAll('.relato-dots span').forEach((d, j) => {
-    d.className = j === i ? 'active' : '';
-  });
-}
-function nextRelato() { selectRelato((relatoIndex + 1) % relatos.length); }
-function prevRelato() { selectRelato((relatoIndex - 1 + relatos.length) % relatos.length); }
 
 // AVALIAÇÕES - Video Toggle
 function toggleAvaliacaoVideo(overlay) {
