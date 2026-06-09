@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Comunidade Movimentadores — Dr. Bruno Machado</title>
+<link rel="icon" type="image/png" href="https://drbrunomachado.vercel.app/Logomarca.png">
+<link rel="apple-touch-icon" href="https://drbrunomachado.vercel.app/Logomarca.png">
 <!-- Pulsedesk Fonts & Stylesheets -->
 <link href="assets/4bcb63d746dc1754_css2.css" rel="stylesheet"/>
 <link href="assets/b626255d7795be45_css2.css" rel="stylesheet"/>
@@ -852,6 +854,96 @@
   @media (max-width: 480px) {
     .thumbs-grid-dep { grid-template-columns: 1fr; }
   }
+  /* AVALIAÇÕES */
+  .avaliacoes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .avaliacoes-col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .avaliacao-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(15, 21, 36, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .avaliacao-card:hover {
+    border-color: rgba(56, 189, 248, 0.28);
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.14),
+                0 0 30px rgba(56, 189, 248, 0.08),
+                0 12px 40px rgba(0, 0, 0, 0.28);
+  }
+  .avaliacao-card img,
+  .avaliacao-card video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+  }
+  .avaliacao-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    padding: 6px 14px;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 20px;
+    font-family: 'Geist', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: #38bdf8;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+  }
+  .avaliacao-badge-video {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+  .avaliacao-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .avaliacao-play-overlay:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .avaliacao-play-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(56, 189, 248, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+  .avaliacao-play-overlay:hover .avaliacao-play-btn {
+    transform: scale(1.08);
+  }
+
+  @media (max-width: 768px) {
+    .avaliacoes-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -895,7 +987,18 @@
     <h1>Venha para a<br><strong>Comunidade Movimentadores.</strong></h1>
     <p class="hero-desc">O espaço onde você aprende a entender o seu corpo, trata a causa real da dor e volta a se mover com liberdade.</p>
     <div class="btn-row">
-      <a href="#entrar" class="btn-p">Entrar na Comunidade</a>
+      <a href="https://wa.me/+558694262812?text=Vim%20pelo%20site" class="btn-p" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Entrar na Comunidade
+      </a>
+      <a href="https://wa.me/+558694262812?text=Vim%20pelo%20site" class="btn-s" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar conosco
+      </a>
+      <a href="https://www.instagram.com/drbrunomachadoortopedista" class="btn-s" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
       <a href="#protocolo" class="btn-s">Conhecer o Protocolo 5R</a>
     </div>
   </div>
@@ -1285,15 +1388,74 @@
   <div class="relato-dots" id="relatoDots"></div>
 </section>
 
+<!-- AVALIAÇÕES -->
+<section class="sec sec-alt" id="avaliacoes">
+  <div class="sec-label">Avaliações</div>
+  <h2>Avaliações de <em>quem</em> <strong>se recuperou.</strong></h2>
+  <p class="sec-body">Resultados reais de pacientes que passaram pelo tratamento.</p>
+
+  <div class="avaliacoes-grid">
+    <!-- Coluna Esquerda: Imagens -->
+    <div class="avaliacoes-col">
+      <div class="avaliacao-card avaliacao-img">
+        <img src="1.jpeg" alt="Avaliação 1">
+        <span class="avaliacao-badge">Imagem</span>
+      </div>
+      <div class="avaliacao-card avaliacao-img">
+        <img src="2.jpeg" alt="Avaliação 2">
+        <span class="avaliacao-badge">Imagem</span>
+      </div>
+      <div class="avaliacao-card avaliacao-img">
+        <img src="3.jpeg" alt="Avaliação 3">
+        <span class="avaliacao-badge">Imagem</span>
+      </div>
+    </div>
+    
+    <!-- Coluna Direita: Vídeos -->
+    <div class="avaliacoes-col">
+      <div class="avaliacao-card avaliacao-video">
+        <video playsinline>
+          <source src="04.mp4" type="video/mp4">
+        </video>
+        <div class="avaliacao-play-overlay" onclick="toggleAvaliacaoVideo(this)">
+          <div class="avaliacao-play-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+          </div>
+        </div>
+        <span class="avaliacao-badge avaliacao-badge-video">Vídeo</span>
+      </div>
+      <div class="avaliacao-card avaliacao-video">
+        <video playsinline>
+          <source src="05.mp4" type="video/mp4">
+        </video>
+        <div class="avaliacao-play-overlay" onclick="toggleAvaliacaoVideo(this)">
+          <div class="avaliacao-play-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+          </div>
+        </div>
+        <span class="avaliacao-badge avaliacao-badge-video">Vídeo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-sec" id="entrar">
   <h2>Pronto para <em>se mover</em><br><strong>sem dor?</strong></h2>
   <p>Entre gratuitamente na Comunidade Movimentadores e comece hoje a entender o que está acontecendo no seu corpo.</p>
   <div class="btn-row">
-    <button onclick="openForm()" class="btn-p" style="font-size:14px;padding:20px 52px">
+    <a href="https://wa.me/+558694262812?text=Vim%20pelo%20site" class="btn-p" target="_blank" rel="noopener noreferrer" style="font-size:14px;padding:20px 52px">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Entrar no WhatsApp
-    </button>
+      Falar conosco
+    </a>
+    <a href="https://www.instagram.com/drbrunomachadoortopedista" class="btn-s" target="_blank" rel="noopener noreferrer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      Instagram
+    </a>
     <a href="#comunidade" class="btn-s">Ver os módulos</a>
   </div>
 </section>
@@ -1519,7 +1681,7 @@
 <!-- SCROLL-REVEAL — igual ao design system de referência (reveal-and-parallax.js) -->
 <script>
 (function() {
-  const reveals = document.querySelectorAll(".sec, .video-item");
+  const reveals = document.querySelectorAll(".sec, .video-item, .avaliacao-card");
   const textNodes = document.querySelectorAll(
     "main section :is(h2, h3, h4, p, .sec-label, .eyebrow), footer :is(h2, p)"
   );
@@ -1706,6 +1868,19 @@ function selectRelato(i) {
 }
 function nextRelato() { selectRelato((relatoIndex + 1) % relatos.length); }
 function prevRelato() { selectRelato((relatoIndex - 1 + relatos.length) % relatos.length); }
+
+// AVALIAÇÕES - Video Toggle
+function toggleAvaliacaoVideo(overlay) {
+  const card = overlay.closest('.avaliacao-card');
+  const video = card.querySelector('video');
+  if (video.paused) {
+    video.play();
+    overlay.style.display = 'none';
+  } else {
+    video.pause();
+    overlay.style.display = 'flex';
+  }
+}
 </script>
 </body>
 </html>
