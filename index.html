@@ -286,6 +286,22 @@
     padding: 0;
   }
   .mod-left { display:flex; align-items:center; gap:20px; }
+  .mod-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0.04) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .mod-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--accent);
+  }
   .mod-num {
     font-family:'Plus Jakarta Sans',sans-serif;
     font-size:14px; font-weight:600; color:var(--accent);
@@ -757,12 +773,21 @@
 
   /* DEPOIMENTOS */
   .depo-inner { max-width: 1100px; margin: 0 auto; }
-  .video-main { display: flex; gap: 40px; align-items: center; margin-bottom: 40px; }
-  .video-player {
-    width: 520px; height: 340px; border-radius: 16px; overflow: hidden;
-    position: relative; background: rgba(15,21,36,0.5); flex-shrink: 0;
-    border: 1px solid var(--card-border);
+  .video-player-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
   }
+  .video-player {
+    width: 100%; max-width: 720px; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden;
+    position: relative; background: rgba(15,21,36,0.5);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    cursor: grab;
+    user-select: none;
+  }
+  .video-player:active { cursor: grabbing; }
   .video-player video { width: 100%; height: 100%; object-fit: cover; }
   .play-overlay {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
@@ -770,58 +795,94 @@
   }
   .play-overlay:hover { background: rgba(0,0,0,0.2); }
   .play-btn-dep {
-    width: 64px; height: 64px; border-radius: 50%; background: var(--accent);
+    width: 80px; height: 80px; border-radius: 50%; background: var(--accent);
     display: flex; align-items: center; justify-content: center;
     transition: transform 0.2s;
+    box-shadow: 0 8px 30px rgba(56,189,248,0.4);
   }
   .play-overlay:hover .play-btn-dep { transform: scale(1.08); }
-  .video-info-dep { flex: 1; }
+  
+  .video-nav-arrows {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 24px;
+    padding: 12px 24px;
+    background: rgba(15,21,36,0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50px;
+    backdrop-filter: blur(12px);
+  }
+  .video-nav-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: var(--accent);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .video-nav-btn:hover {
+    background: var(--accent);
+    color: var(--blue-deep);
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(56,189,248,0.4);
+  }
+  .video-counter {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--white);
+    min-width: 60px;
+    text-align: center;
+  }
+  
+  .video-info-dep { 
+    flex: 1; 
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
   .tag-dep { font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-  .video-info-dep blockquote { font-size: 16px; font-weight: 300; line-height: 1.8; color: var(--dim); margin-bottom: 16px; font-style: italic; }
-  .video-info-dep cite { font-size: 16px; font-weight: 500; font-style: normal; color: var(--white); display: block; margin-bottom: 4px; }
-  .trat-dep { font-size: 13px; color: var(--text-muted); }
-  .video-dots-dep { display: flex; gap: 8px; margin-top: 16px; }
-  .video-dots-dep span {
-    height: 8px; border-radius: 4px; transition: all 0.3s; cursor: pointer;
+  .video-info-dep blockquote { font-size: 18px; font-weight: 300; line-height: 1.8; color: var(--dim); margin-bottom: 16px; font-style: italic; }
+  .video-info-dep cite { font-size: 18px; font-weight: 500; font-style: normal; color: var(--white); display: block; margin-bottom: 4px; }
+  .trat-dep { font-size: 14px; color: var(--text-muted); }
+  
+  .thumbs-grid-dep { 
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 16px;
+    margin-top: 40px;
   }
-  .video-dots-dep .active { width: 24px; background: var(--accent); }
-  .video-dots-dep .inactive { width: 8px; background: rgba(255,255,255,0.15); }
-  .thumbs-header-dep {
-    display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-  }
-  .thumbs-header-dep h3 { font-size: 13px; font-weight: 500; color: var(--dim); letter-spacing: 1px; }
-  .thumbs-arrows-dep { display: flex; gap: 8px; }
-  .thumbs-arrows-dep button {
-    width: 32px; height: 32px; border-radius: 50%;
-    border: 1px solid var(--card-border); background: none; color: var(--dim);
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    transition: 0.2s; font-size: 16px;
-  }
-  .thumbs-arrows-dep button:last-child { background: var(--accent); border-color: var(--accent); }
-  .thumbs-arrows-dep button:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
-  .thumbs-grid-dep { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .thumb-card-dep {
     border-radius: 12px; overflow: hidden; background: rgba(15,21,36,0.5);
-    border: 1px solid var(--card-border); cursor: pointer; transition: border-color 0.2s;
+    border: 1px solid var(--card-border); cursor: pointer; transition: all 0.3s;
   }
-  .thumb-card-dep:hover { border-color: var(--accent); }
+  .thumb-card-dep:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .thumb-card-dep.active { border-color: var(--accent); box-shadow: 0 0 20px rgba(56,189,248,0.2); }
   .thumb-video-dep {
-    position: relative; height: 140px; background: rgba(15,21,36,0.3);
+    position: relative; height: 100px; background: rgba(15,21,36,0.3);
     display: flex; align-items: center; justify-content: center;
   }
   .thumb-video-dep video { width: 100%; height: 100%; object-fit: cover; }
   .thumb-play-dep {
     position: absolute; width: 36px; height: 36px; border-radius: 50%;
     background: rgba(56,189,248,0.8); display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s;
   }
+  .thumb-card-dep:hover .thumb-play-dep { transform: scale(1.1); }
   .thumb-duration-dep {
     position: absolute; right: 8px; bottom: 8px; padding: 4px 8px;
     background: rgba(0,0,0,0.7); border-radius: 4px;
     font-size: 10px; font-weight: 500; color: #fff;
   }
   .thumb-info-dep { padding: 12px 14px; }
-  .thumb-info-dep h4 { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-  .thumb-info-dep p { font-size: 12px; font-weight: 300; color: var(--dim); }
+  .thumb-info-dep h4 { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .thumb-info-dep p { font-size: 11px; font-weight: 300; color: var(--dim); }
 
   /* RELATOS */
   .relato-slider {
@@ -953,12 +1014,21 @@
   .avaliacao-play-overlay:hover .avaliacao-play-btn {
     transform: scale(1.08);
   }
+  .avaliacoes-single {
+    max-width: 500px;
+  }
 
   @media (max-width: 768px) {
     .avaliacoes-grid {
       grid-template-columns: 1fr;
       gap: 24px;
     }
+    .thumbs-grid-dep { grid-template-columns: repeat(3, 1fr); }
+    .video-nav-btn { width: 48px; height: 48px; }
+    .video-nav-arrows { gap: 16px; padding: 10px 20px; }
+  }
+  @media (max-width: 480px) {
+    .thumbs-grid-dep { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
@@ -1049,7 +1119,13 @@
     <div class="mod" onclick="toggle(this)">
       <div class="mod-header">
         <div class="mod-left">
-          <div class="mod-icon">🦴</div>
+          <div class="mod-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a3 3 0 0 0-3 3c0 1.5.5 2.5 1 3.5L12 12l2-3.5c.5-1 1-2 1-3.5a3 3 0 0 0-3-3z"/>
+              <path d="M9 12.5L7 14.5c-1 1-1.5 2.5-1.5 4v1.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V18.5c0-1.5-.5-3-1.5-4l-2-2"/>
+              <path d="M12 12v4"/>
+            </svg>
+          </div>
           <div>
             <div class="mod-title">Entenda sua dor</div>
             <div class="mod-sub">4 vídeos educativos</div>
@@ -1099,7 +1175,12 @@
     <div class="mod" onclick="toggle(this)">
       <div class="mod-header">
         <div class="mod-left">
-          <div class="mod-icon">🔄</div>
+          <div class="mod-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.5 2v6h-6"/>
+              <path d="M21.34 15.57a10 10 0 1 1-.57-8.38"/>
+            </svg>
+          </div>
           <div>
             <div class="mod-title">Protocolo 5R</div>
             <div class="mod-sub">6 vídeos — metodologia completa</div>
@@ -1165,7 +1246,14 @@
     <div class="mod" onclick="toggle(this)">
       <div class="mod-header">
         <div class="mod-left">
-          <div class="mod-icon">🏃</div>
+          <div class="mod-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="5" r="2"/>
+              <path d="M10 22l2-7 3 3v6"/>
+              <path d="M14 13l2.5-2.5a2.12 2.12 0 0 1 3 3L17 16"/>
+              <path d="M10 22l-2-5-3-1"/>
+            </svg>
+          </div>
           <div>
             <div class="mod-title">Movimento sem dor</div>
             <div class="mod-sub">4 vídeos práticos</div>
@@ -1356,7 +1444,7 @@
   <p class="sec-body">Veja histórias reais de pacientes que passaram pelo Protocolo 5R e voltaram a viver sem dor.</p>
 
   <div class="depo-inner">
-    <div class="video-main">
+    <div class="video-player-container">
       <div class="video-player">
         <video id="mainVideo" playsinline>
           <source src="https://drbrunomachado.vercel.app/lv_0_20250717133315.mp4" type="video/mp4">
@@ -1367,22 +1455,29 @@
           </div>
         </div>
       </div>
-      <div class="video-info-dep">
-        <p class="tag-dep" id="vTag">DEPOIMENTO EM DESTAQUE</p>
-        <blockquote id="vQuote">"Há 3 anos sentia dor no joelho que me impedia de subir escadas. Após 4 meses com o Dr. Bruno, voltei a caminhar sem dor. O Protocolo 5R mudou minha vida."</blockquote>
-        <cite id="vCite">Maria Clara S., 58 anos</cite>
-        <p class="trat-dep" id="vTrat">Tratamento: Protocolo 5R para artrose de joelho</p>
-        <div class="video-dots-dep" id="videoDots"></div>
+      
+      <div class="video-nav-arrows">
+        <button class="video-nav-btn" onclick="prevVideo()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <span class="video-counter" id="videoCounter">1 / 5</span>
+        <button class="video-nav-btn" onclick="nextVideo()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
       </div>
     </div>
 
-    <div class="thumbs-header-dep">
-      <h3>Mais depoimentos</h3>
-      <div class="thumbs-arrows-dep">
-        <button onclick="prevVideo()">&#8249;</button>
-        <button onclick="nextVideo()">&#8250;</button>
-      </div>
+    <div class="video-info-dep">
+      <p class="tag-dep" id="vTag">DEPOIMENTO EM DESTAQUE</p>
+      <blockquote id="vQuote">"Há 3 anos sentia dor no joelho que me impedia de subir escadas. Após 4 meses com o Dr. Bruno, voltei a caminhar sem dor. O Protocolo 5R mudou minha vida."</blockquote>
+      <cite id="vCite">Maria Clara S., 58 anos</cite>
+      <p class="trat-dep" id="vTrat">Tratamento: Protocolo 5R para artrose de joelho</p>
     </div>
+
     <div class="thumbs-grid-dep" id="thumbsGrid"></div>
   </div>
 </section>
@@ -1391,10 +1486,9 @@
 <section class="sec sec-alt" id="relatos">
   <div class="sec-label">Resultados reais</div>
   <h2>Relatos <em>e</em> avaliações <strong>de pacientes.</strong></h2>
-  <p class="sec-body">Veja as imagens e vídeos de quem passou pelo tratamento e recuperou sua qualidade de vida.</p>
+  <p class="sec-body">Veja as imagens de quem passou pelo tratamento e recuperou sua qualidade de vida.</p>
 
-  <div class="avaliacoes-grid">
-    <!-- Coluna Esquerda: Imagens -->
+  <div class="avaliacoes-grid avaliacoes-single">
     <div class="avaliacoes-col">
       <div class="avaliacao-card avaliacao-img">
         <img src="1.jpeg" alt="Avaliação 1">
@@ -1407,36 +1501,6 @@
       <div class="avaliacao-card avaliacao-img">
         <img src="3.jpeg" alt="Avaliação 3">
         <span class="avaliacao-badge">Resultado</span>
-      </div>
-    </div>
-    
-    <!-- Coluna Direita: Vídeos -->
-    <div class="avaliacoes-col">
-      <div class="avaliacao-card avaliacao-video">
-        <video playsinline>
-          <source src="04.mp4" type="video/mp4">
-        </video>
-        <div class="avaliacao-play-overlay" onclick="toggleAvaliacaoVideo(this)">
-          <div class="avaliacao-play-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
-              <polygon points="5 3 19 12 5 21 5 3"/>
-            </svg>
-          </div>
-        </div>
-        <span class="avaliacao-badge avaliacao-badge-video">Depoimento</span>
-      </div>
-      <div class="avaliacao-card avaliacao-video">
-        <video playsinline>
-          <source src="05.mp4" type="video/mp4">
-        </video>
-        <div class="avaliacao-play-overlay" onclick="toggleAvaliacaoVideo(this)">
-          <div class="avaliacao-play-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
-              <polygon points="5 3 19 12 5 21 5 3"/>
-            </svg>
-          </div>
-        </div>
-        <span class="avaliacao-badge avaliacao-badge-video">Depoimento</span>
       </div>
     </div>
   </div>
@@ -1762,6 +1826,22 @@ const depVideos = [
     name: "Paciente",
     trat: "Tratamento: Protocolo 5R",
     dur: "0:30"
+  },
+  {
+    src: "04.mp4",
+    tag: "DEPOIMENTO",
+    quote: '"Não acreditei que seria possível voltar a me movimentar sem dor. O Dr. Bruno mudou minha vida."',
+    name: "Paciente",
+    trat: "Tratamento: Protocolo 5R",
+    dur: "1:15"
+  },
+  {
+    src: "05.mp4",
+    tag: "DEPOIMENTO",
+    quote: '"Depois de anos sofrendo, finalmente encontrei uma solução que funciona de verdade."',
+    name: "Paciente",
+    trat: "Tratamento: Protocolo 5R",
+    dur: "1:30"
   }
 ];
 
@@ -1772,22 +1852,14 @@ const depVTag = document.getElementById('vTag');
 const depVQuote = document.getElementById('vQuote');
 const depVCite = document.getElementById('vCite');
 const depVTrat = document.getElementById('vTrat');
-const depDots = document.getElementById('videoDots');
+const depCounter = document.getElementById('videoCounter');
 const depThumbs = document.getElementById('thumbsGrid');
 
-if (depDots) {
-  depVideos.forEach((_, i) => {
-    const dot = document.createElement('span');
-    dot.className = i === 0 ? 'active' : 'inactive';
-    dot.onclick = () => selectDepVideo(i);
-    depDots.appendChild(dot);
-  });
-}
-
+// Build thumbnails
 if (depThumbs) {
   depVideos.forEach((v, i) => {
     const card = document.createElement('div');
-    card.className = 'thumb-card-dep';
+    card.className = 'thumb-card-dep' + (i === 0 ? ' active' : '');
     card.onclick = () => selectDepVideo(i);
     card.innerHTML = `
       <div class="thumb-video-dep">
@@ -1814,12 +1886,13 @@ function selectDepVideo(i) {
   depVQuote.textContent = v.quote;
   depVCite.textContent = v.name;
   depVTrat.textContent = v.trat;
+  depCounter.textContent = (i + 1) + ' / ' + depVideos.length;
   depOverlay.style.display = 'flex';
-  document.querySelectorAll('.video-dots-dep span').forEach((d, j) => {
-    d.className = j === i ? 'active' : 'inactive';
+  
+  // Update active thumbnail
+  document.querySelectorAll('.thumb-card-dep').forEach((card, j) => {
+    card.classList.toggle('active', j === i);
   });
-  // Scroll to video player
-  document.querySelector('.video-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function togglePlay() {
@@ -1834,6 +1907,53 @@ function togglePlay() {
 
 function nextVideo() { selectDepVideo((depIndex + 1) % depVideos.length); }
 function prevVideo() { selectDepVideo((depIndex - 1 + depVideos.length) % depVideos.length); }
+
+// Swipe/Drag functionality
+let startX = 0;
+let isDragging = false;
+const videoPlayer = document.querySelector('.video-player');
+
+if (videoPlayer) {
+  videoPlayer.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    videoPlayer.style.cursor = 'grabbing';
+  });
+
+  videoPlayer.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+  });
+
+  videoPlayer.addEventListener('mouseup', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    videoPlayer.style.cursor = 'grab';
+    const diff = startX - e.clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextVideo();
+      else prevVideo();
+    }
+  });
+
+  videoPlayer.addEventListener('mouseleave', () => {
+    isDragging = false;
+    videoPlayer.style.cursor = 'grab';
+  });
+
+  // Touch events for mobile
+  videoPlayer.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  videoPlayer.addEventListener('touchend', (e) => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextVideo();
+      else prevVideo();
+    }
+  });
+}
 
 // AVALIAÇÕES - Video Toggle
 function toggleAvaliacaoVideo(overlay) {
