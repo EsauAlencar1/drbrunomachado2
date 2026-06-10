@@ -97,6 +97,40 @@
   }
   .nav-cta:hover { background: #ecfeff !important; transform: scale(1.03); }
 
+  .nav-buttons-desktop {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .nav-btn-primary {
+    display: flex; align-items: center; gap: 6px;
+    background: #38bdf8; color: #020617;
+    padding: 8px 16px; border-radius: 9999px;
+    font-family: 'Geist', sans-serif; font-weight: 600; font-size: 13px;
+    border: none; cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .nav-btn-primary:hover { background: #7dd3fc; transform: scale(1.03); }
+  .nav-btn-whatsapp {
+    display: flex; align-items: center; gap: 6px;
+    background: #25D366; color: #fff;
+    padding: 8px 16px; border-radius: 9999px;
+    font-family: 'Geist', sans-serif; font-weight: 600; font-size: 13px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .nav-btn-whatsapp:hover { background: #22c55e; transform: scale(1.03); }
+  @media (max-width: 768px) {
+    .nav-buttons-desktop { display: none !important; }
+  }
+
+  .hero .btn-row-desktop { display: flex; }
+  .hero .btn-row-mobile { display: none; }
+  @media (max-width: 768px) {
+    .hero .btn-row-desktop { display: none !important; }
+    .hero .btn-row-mobile { display: flex !important; }
+  }
+
   /* HERO */
   .hero {
     position:relative; min-height:100vh;
@@ -780,7 +814,7 @@
     margin-bottom: 40px;
   }
   .video-player {
-    width: 100%; max-width: 720px; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden;
+    width: 100%; max-width: 720px; border-radius: 20px; overflow: hidden;
     position: relative; background: rgba(15,21,36,0.5);
     border: 1px solid var(--card-border);
     box-shadow: 0 20px 60px rgba(0,0,0,0.4);
@@ -788,7 +822,7 @@
     user-select: none;
   }
   .video-player:active { cursor: grabbing; }
-  .video-player video { width: 100%; height: 100%; object-fit: cover; }
+  .video-player video { width: 100%; height: 100%; object-fit: contain; }
   .play-overlay {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     background: rgba(0,0,0,0.3); cursor: pointer; transition: background 0.3s;
@@ -868,7 +902,7 @@
     position: relative; height: 100px; background: rgba(15,21,36,0.3);
     display: flex; align-items: center; justify-content: center;
   }
-  .thumb-video-dep video { width: 100%; height: 100%; object-fit: cover; }
+  .thumb-video-dep video { width: 100%; height: 100%; object-fit: contain; }
   .thumb-play-dep {
     position: absolute; width: 36px; height: 36px; border-radius: 50%;
     background: rgba(56,189,248,0.8); display: flex; align-items: center; justify-content: center;
@@ -981,6 +1015,58 @@
     backdrop-filter: blur(8px);
     z-index: 2;
   }
+
+  /* AVALIAÇÕES STACK */
+  .avaliacoes-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    max-width: 700px;
+    margin: 40px auto 0;
+    padding-bottom: 60px;
+  }
+  .av-stack-card {
+    position: sticky;
+    overflow: hidden;
+    background: rgba(15,21,36,0.85);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 0;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 18px 55px rgba(15,23,42,0.22), inset 0 1px 0 rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(12px);
+  }
+  .av-stack-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 20px; right: 20px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(56,189,248,0.5), transparent);
+    pointer-events: none;
+    z-index: 3;
+  }
+  .av-stack-card img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  .av-stack-card .avaliacao-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+  }
+  .av-stack-card:hover {
+    border-color: rgba(56,189,248,0.28);
+    box-shadow: 0 0 0 1px rgba(56,189,248,0.14),
+                0 0 30px rgba(56,189,248,0.08),
+                0 18px 55px rgba(0,0,0,0.35);
+  }
   .avaliacao-badge-video {
     background: rgba(0, 0, 0, 0.6);
     border-color: rgba(255, 255, 255, 0.2);
@@ -1019,10 +1105,6 @@
   }
 
   @media (max-width: 768px) {
-    .avaliacoes-grid {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
     .thumbs-grid-dep { grid-template-columns: repeat(3, 1fr); }
     .video-nav-btn { width: 48px; height: 48px; }
     .video-nav-arrows { gap: 16px; padding: 10px 20px; }
@@ -1046,6 +1128,16 @@
   <ul class="nav-links">
     <li><a href="#comunidade">Comunidade</a></li>
     <li><a href="#protocolo">Protocolo 5R</a></li>
+    <li class="nav-buttons-desktop">
+      <button onclick="openForm()" class="nav-btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Entrar
+      </button>
+      <a href="https://wa.me/+558694262812?text=Vim%20pelo%20site" class="nav-btn-whatsapp" target="_blank" rel="noopener noreferrer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar conosco
+      </a>
+    </li>
     <li><a href="#entrar" class="nav-cta">Entrar agora</a></li>
   </ul>
 </nav>
@@ -1072,7 +1164,22 @@
     <div class="eyebrow"><span class="eyebrow-line"></span>Dr. Bruno Machado<span class="eyebrow-line"></span></div>
     <h1>Venha para a<br><strong>Comunidade Movimentadores.</strong></h1>
     <p class="hero-desc">O espaço onde você aprende a entender o seu corpo, trata a causa real da dor e volta a se mover com liberdade.</p>
-    <div class="btn-row">
+    <div class="btn-row btn-row-mobile">
+      <button onclick="openForm()" class="btn-p">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Entrar na Comunidade
+      </button>
+      <a href="https://wa.me/+558694262812?text=Vim%20pelo%20site" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar conosco
+      </a>
+      <a href="https://www.instagram.com/drbrunomachadoortopedista" class="btn-s" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a href="#protocolo" class="btn-s">Conhecer o Protocolo 5R</a>
+    </div>
+    <div class="btn-row btn-row-desktop">
       <button onclick="openForm()" class="btn-p">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Entrar na Comunidade
@@ -1488,20 +1595,54 @@
   <h2>Relatos <em>e</em> avaliações <strong>de pacientes.</strong></h2>
   <p class="sec-body">Veja as imagens de quem passou pelo tratamento e recuperou sua qualidade de vida.</p>
 
-  <div class="avaliacoes-grid avaliacoes-single">
-    <div class="avaliacoes-col">
-      <div class="avaliacao-card avaliacao-img">
-        <img src="1.jpeg" alt="Avaliação 1">
-        <span class="avaliacao-badge">Antes e depois</span>
-      </div>
-      <div class="avaliacao-card avaliacao-img">
-        <img src="2.jpeg" alt="Avaliação 2">
-        <span class="avaliacao-badge">Evolução</span>
-      </div>
-      <div class="avaliacao-card avaliacao-img">
-        <img src="3.jpeg" alt="Avaliação 3">
-        <span class="avaliacao-badge">Resultado</span>
-      </div>
+  <div class="avaliacoes-stack">
+    <div class="av-stack-card" style="top:80px; z-index:1;">
+      <img src="1.jpeg" alt="Avaliação 1">
+      <span class="avaliacao-badge">Antes e depois</span>
+    </div>
+    <div class="av-stack-card" style="top:90px; z-index:2;">
+      <img src="2.jpeg" alt="Avaliação 2">
+      <span class="avaliacao-badge">Evolução</span>
+    </div>
+    <div class="av-stack-card" style="top:100px; z-index:3;">
+      <img src="3.jpeg" alt="Avaliação 3">
+      <span class="avaliacao-badge">Resultado</span>
+    </div>
+    <div class="av-stack-card" style="top:110px; z-index:4;">
+      <img src="4.jpeg" alt="Avaliação 4">
+      <span class="avaliacao-badge">Evolução</span>
+    </div>
+    <div class="av-stack-card" style="top:120px; z-index:5;">
+      <img src="5.jpeg" alt="Avaliação 5">
+      <span class="avaliacao-badge">Resultado</span>
+    </div>
+    <div class="av-stack-card" style="top:130px; z-index:6;">
+      <img src="6.jpeg" alt="Avaliação 6">
+      <span class="avaliacao-badge">Antes e depois</span>
+    </div>
+    <div class="av-stack-card" style="top:140px; z-index:7;">
+      <img src="7.jpeg" alt="Avaliação 7">
+      <span class="avaliacao-badge">Evolução</span>
+    </div>
+    <div class="av-stack-card" style="top:150px; z-index:8;">
+      <img src="8.jpeg" alt="Avaliação 8">
+      <span class="avaliacao-badge">Resultado</span>
+    </div>
+    <div class="av-stack-card" style="top:160px; z-index:9;">
+      <img src="9.jpeg" alt="Avaliação 9">
+      <span class="avaliacao-badge">Antes e depois</span>
+    </div>
+    <div class="av-stack-card" style="top:170px; z-index:10;">
+      <img src="10.jpeg" alt="Avaliação 10">
+      <span class="avaliacao-badge">Evolução</span>
+    </div>
+    <div class="av-stack-card" style="top:180px; z-index:11;">
+      <img src="11.jpeg" alt="Avaliação 11">
+      <span class="avaliacao-badge">Resultado</span>
+    </div>
+    <div class="av-stack-card" style="top:190px; z-index:12;">
+      <img src="12.jpeg" alt="Avaliação 12">
+      <span class="avaliacao-badge">Antes e depois</span>
     </div>
   </div>
 </section>
@@ -1823,7 +1964,7 @@ const depVideos = [
     src: "781f02a0-8c7d-4adc-b103-9b1557a94fe1.MP4",
     tag: "AVALIAÇÃO",
     quote: '"Resultado incrível! Em poucos meses senti uma melhora enorme na qualidade de vida."',
-    name: "Paciente",
+    name: "Antônio Alves",
     trat: "Tratamento: Protocolo 5R",
     dur: "0:30"
   },
@@ -1831,7 +1972,7 @@ const depVideos = [
     src: "04.mp4",
     tag: "DEPOIMENTO",
     quote: '"Não acreditei que seria possível voltar a me movimentar sem dor. O Dr. Bruno mudou minha vida."',
-    name: "Paciente",
+    name: "Dona Zanaide",
     trat: "Tratamento: Protocolo 5R",
     dur: "1:15"
   },
@@ -1839,7 +1980,7 @@ const depVideos = [
     src: "05.mp4",
     tag: "DEPOIMENTO",
     quote: '"Depois de anos sofrendo, finalmente encontrei uma solução que funciona de verdade."',
-    name: "Paciente",
+    name: "Dona Zanaide",
     trat: "Tratamento: Protocolo 5R",
     dur: "1:30"
   }
