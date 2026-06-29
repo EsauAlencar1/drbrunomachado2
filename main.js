@@ -436,3 +436,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   track.style.cursor = 'grab';
 });
+
+// === LOCAIS — Scroll Reveal on Mobile ===
+(function() {
+  const cards = document.querySelectorAll('.local-card');
+  if (!cards.length) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('revealed');
+        }, i * 120);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  cards.forEach(card => observer.observe(card));
+})();
