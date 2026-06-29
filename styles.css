@@ -1219,11 +1219,349 @@ h1          { animation-delay:0.3s; }
   margin-top: 40px;
 }
 
+/* === DOBRAS SECTIONS — CSS === */
+
+/* HERO BADGES */
+.hero-badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+.hero-badge {
+  font-family: 'Geist', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--dim);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(8px);
+}
+
+/* HERO VIDEO OVERLAY */
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8,12,20,0.7) 0%, transparent 40%, rgba(8,12,20,0.3) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* MODULOS — subtitle & arrow */
+.mod-sub {
+  font-family: 'Geist', sans-serif;
+  font-size: 13px;
+  color: var(--dim);
+  margin-top: 2px;
+}
+.mod-arrow {
+  color: var(--dim);
+  font-size: 18px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+.mod.open .mod-arrow {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+/* ESP GRID — Especialidades */
+.esp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin: 40px auto 0;
+  width: 100%;
+}
+.esp-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.esp-card:hover {
+  border-color: rgba(56, 189, 248, 0.25);
+  background: rgba(15, 21, 36, 0.85);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+.esp-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0.04) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.esp-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--accent);
+}
+.esp-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+}
+.esp-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--dim);
+}
+
+/* SOBRE O MÉDICO */
+.sobre-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+.sobre-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sobre-text p {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--dim);
+}
+.sobre-text p strong {
+  color: var(--white);
+  font-weight: 500;
+}
+.sobre-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+.sobre-badge {
+  font-family: 'Geist', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  letter-spacing: 0.3px;
+}
+
+/* DIFERENCIAIS */
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin: 40px auto 0;
+  width: 100%;
+}
+.diff-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.diff-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20px; right: 20px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(56,189,248,0.4), transparent);
+  pointer-events: none;
+}
+.diff-card:hover {
+  border-color: rgba(56, 189, 248, 0.28);
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 1px rgba(56,189,248,0.1), 0 12px 40px rgba(0,0,0,0.3);
+}
+.diff-num {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 12px;
+  text-shadow: 0 0 24px rgba(56,189,248,0.3);
+}
+.diff-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.diff-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--dim);
+}
+
+/* STEPS — Como Funciona */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin: 40px auto 0;
+  width: 100%;
+}
+.step-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20px; right: 20px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(56,189,248,0.4), transparent);
+  pointer-events: none;
+}
+.step-card:hover {
+  border-color: rgba(56, 189, 248, 0.28);
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 1px rgba(56,189,248,0.1), 0 12px 40px rgba(0,0,0,0.3);
+}
+.step-num {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 12px;
+  text-shadow: 0 0 24px rgba(56,189,248,0.3);
+}
+.step-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.step-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--dim);
+}
+
+/* MODAL OVERLAY (form) */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(8, 12, 20, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+.modal-card {
+  background: linear-gradient(135deg, rgba(15, 21, 36, 0.95) 0%, rgba(20, 30, 50, 0.95) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 420px;
+  width: 100%;
+  position: relative;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(56, 189, 248, 0.1);
+}
+.modal-overlay.active .modal-card {
+  transform: scale(1) translateY(0);
+}
+.modal-card h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.modal-card p {
+  font-size: 14px;
+  color: var(--dim);
+  margin-bottom: 24px;
+}
+.modal-card input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: var(--white);
+  font-family: 'Geist', sans-serif;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+.modal-card input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(56, 189, 248, 0.05);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+}
+.modal-card input::placeholder {
+  color: rgba(148, 163, 184, 0.6);
+}
+
+/* RESPONSIVE — DOBRAS */
 @media (max-width: 768px) {
   .thumbs-grid-dep { grid-template-columns: repeat(3, 1fr); }
   .video-nav-btn { width: 48px; height: 48px; }
   .video-nav-arrows { gap: 16px; padding: 10px 20px; }
+  .esp-grid { grid-template-columns: 1fr 1fr; }
+  .diff-grid { grid-template-columns: 1fr 1fr; }
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .hero-badges { gap: 8px; }
+  .hero-badge { font-size: 10px; padding: 5px 12px; }
+  .sobre-inner { text-align: center; }
+  .sobre-text { align-items: center; text-align: center; }
+  .sobre-badges { justify-content: center; }
 }
 @media (max-width: 480px) {
   .thumbs-grid-dep { grid-template-columns: repeat(2, 1fr); }
+  .esp-grid { grid-template-columns: 1fr; }
+  .diff-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
 }
