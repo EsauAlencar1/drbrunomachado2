@@ -1165,6 +1165,60 @@ h1          { animation-delay:0.3s; }
   max-width: 500px;
 }
 
+/* LOCAIS DE ATENDIMENTO */
+.locais-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin: 40px auto 0;
+}
+.local-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.local-card:hover {
+  border-color: rgba(56,189,248,0.25);
+  box-shadow: 0 0 0 1px rgba(56,189,248,0.1), 0 8px 32px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+.local-name {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--white);
+}
+.local-end {
+  font-size: 14px;
+  color: var(--dim);
+  line-height: 1.5;
+}
+.local-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.local-map:hover {
+  color: #7dd3fc;
+}
+.local-map svg {
+  flex-shrink: 0;
+}
+.locais-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
 @media (max-width: 768px) {
   .thumbs-grid-dep { grid-template-columns: repeat(3, 1fr); }
   .video-nav-btn { width: 48px; height: 48px; }
