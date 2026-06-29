@@ -368,3 +368,71 @@ function toggleAvaliacaoVideo(overlay) {
     overlay.style.display = 'flex';
   }
 }
+
+// === AVALIAÇÕES - Horizontal Carousel ===
+let avIndex = 0;
+const avTotal = 12;
+
+function avCarouselUpdate() {
+  const track = document.getElementById('avCarouselTrack');
+  const counter = document.getElementById('avCounter');
+  if (!track || !counter) return;
+  const card = track.querySelector('.av-carousel-card');
+  if (!card) return;
+  const cardWidth = card.offsetWidth + 20; // card + gap
+  track.scrollTo({ left: avIndex * cardWidth, behavior: 'smooth' });
+  counter.textContent = (avIndex + 1) + ' / ' + avTotal;
+}
+
+function avCarouselNext() {
+  avIndex = Math.min(avIndex + 1, avTotal - 1);
+  avCarouselUpdate();
+}
+
+function avCarouselPrev() {
+  avIndex = Math.max(avIndex - 1, 0);
+  avCarouselUpdate();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('avCarouselTrack');
+  if (!track) return;
+
+  // Sync counter on manual scroll
+  track.addEventListener('scroll', () => {
+    const card = track.querySelector('.av-carousel-card');
+    if (!card) return;
+    const cardWidth = card.offsetWidth + 20;
+    avIndex = Math.round(track.scrollLeft / cardWidth);
+    const counter = document.getElementById('avCounter');
+    if (counter) counter.textContent = (avIndex + 1) + ' / ' + avTotal;
+  });
+
+  // Touch swipe (mobile) — native scroll-snap handles this,
+  // but we also add mouse drag for desktop
+  let isDragging = false;
+  let startX = 0;
+  let scrollLeft = 0;
+
+  track.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+    track.style.cursor = 'grabbing';
+  });
+  track.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX);
+  });
+  track.addEventListener('mouseup', () => {
+    isDragging = false;
+    track.style.cursor = 'grab';
+  });
+  track.addEventListener('mouseleave', () => {
+    isDragging = false;
+    track.style.cursor = 'grab';
+  });
+  track.style.cursor = 'grab';
+});
