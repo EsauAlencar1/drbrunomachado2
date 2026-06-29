@@ -579,19 +579,25 @@ h1          { animation-delay:0.3s; }
 @media(max-width:960px) {
   nav{ padding:16px 24px; }
   .nav-links{ display:none; }
-  .hero{ grid-template-columns:1fr; }
-  .hero-video-bg{ height:70vw; }
+  .hero{ grid-template-columns:1fr; min-height:auto; padding-bottom:60px; }
+  .hero-video-bg{ height:50vw; min-height:200px; max-height:320px; }
   .hero-left{ padding:130px 28px 60px; }
+  h1{ font-size:clamp(36px, 8vw, 52px); }
+  .hero-desc{ font-size:14px; max-width:360px; }
+  .hero-badges{ gap:8px; }
+  .hero-badge{ font-size:10px; padding:5px 12px; }
+  .btn-row{ gap:10px; }
+  .btn-p, .btn-whatsapp, .btn-s{ padding:12px 22px; font-size:13px; }
   .hero-stats {
     position: relative;
     bottom: auto;
     left: auto;
     transform: none;
-    margin-top: 48px;
+    margin-top: 32px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px 32px;
+    gap: 16px 28px;
     padding: 0 24px;
     width: 100%;
   }
@@ -601,13 +607,22 @@ h1          { animation-delay:0.3s; }
     margin: 0;
     text-align: center;
   }
-  .sec{ padding:80px 24px; }
+  .stat-n{ font-size:22px; }
+  .sec{ padding:60px 20px; }
+  h2{ font-size:clamp(28px, 6vw, 40px); }
   .modulos-grid{ gap:12px; }
-  .mod { padding: 28px 20px; border-radius: 20px; }
-  .r5-grid{ gap:12px; }
-  .r-card { padding: 28px 20px; border-radius: 20px; }
-  .cta-sec{ padding:80px 24px; }
-  footer{ flex-direction:column; gap:14px; text-align:center; padding:36px 24px; }
+  .mod { padding: 20px 16px; border-radius: 16px; }
+  .mod-header{ padding:16px 20px; }
+  .r5-grid{ gap:10px; }
+  .r-card { padding: 24px 16px; border-radius: 16px; }
+  .cta-sec{ padding:60px 20px; }
+  .cta-sec h2{ font-size:clamp(32px, 7vw, 48px); }
+  footer{ flex-direction:column; gap:14px; text-align:center; padding:36px 20px; }
+  .play-btn{ padding:16px 24px; gap:8px; }
+  .play-btn svg{ width:36px; height:36px; padding:8px; }
+  .play-btn span{ font-size:12px; }
+  .hero-content{ padding:0 16px; }
+  .eyebrow{ font-size:10px; letter-spacing:2px; margin-bottom:20px; }
 }
 
 /* Play Button */
@@ -1564,4 +1579,12 @@ h1          { animation-delay:0.3s; }
   .esp-grid { grid-template-columns: 1fr; }
   .diff-grid { grid-template-columns: 1fr; }
   .steps-grid { grid-template-columns: 1fr; }
+  h1{ font-size:32px; }
+  .hero-video-bg{ height:45vw; min-height:180px; max-height:260px; }
+  .hero-desc{ font-size:13px; max-width:300px; }
+  .hero-stats{ gap:12px 20px; }
+  .stat-n{ font-size:18px; }
+  .stat-l{ font-size:10px; }
+  .btn-p, .btn-whatsapp, .btn-s{ padding:12px 18px; font-size:12px; }
+  .btn-p svg, .btn-whatsapp svg, .btn-s svg{ width:16px; height:16px; }
 }
