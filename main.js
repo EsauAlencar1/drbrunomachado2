@@ -20,6 +20,22 @@ function toggle(el) {
   }
 }
 
+// === MOBILE MENU ===
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const hamburger = document.querySelector('.nav-hamburger');
+  menu.classList.toggle('active');
+  hamburger.classList.toggle('active');
+  document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+}
+function closeMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const hamburger = document.querySelector('.nav-hamburger');
+  menu.classList.remove('active');
+  hamburger.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
 // === NAV - Scroll class ===
 window.addEventListener('scroll', () => {
   if (window.scrollY > 80) {
