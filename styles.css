@@ -113,13 +113,14 @@ nav {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
-  border-radius: 12px;
+  padding: 8px 16px;
+  border-radius: 9999px;
   background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-  color: var(--white);
+  color: #020617;
   text-decoration: none;
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
   font-size: 13px;
-  font-weight: 500;
   transition: all 0.3s ease;
 }
 .nav-btn-ig:hover { transform: scale(1.03); opacity: 0.9; }
@@ -203,7 +204,8 @@ nav {
   max-width: 280px;
 }
 .mobile-menu-btns .nav-btn-primary,
-.mobile-menu-btns .nav-btn-whatsapp {
+.mobile-menu-btns .nav-btn-whatsapp,
+.mobile-menu-btns .nav-btn-ig {
   justify-content: center;
   padding: 14px 28px;
   font-size: 15px;
