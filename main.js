@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="thumb-duration-dep">${v.dur}</div>
         </div>
         <div class="thumb-info-dep">
-          <h4>${v.name.split(',')[0]}</h4>
+          <h3>${v.name.split(',')[0]}</h3>
           <p>${v.trat}</p>
         </div>
       `;
