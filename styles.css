@@ -636,6 +636,20 @@ h2 strong { font-weight:700; }
   margin-bottom: 40px;
 }
 
+.protocolo-video-container {
+  max-width: 720px;
+  margin: 0 auto 40px auto;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.protocolo-video-container video {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
 /* CTA SECTION */
 .cta-sec {
   text-align:center; padding: 140px 80px;
