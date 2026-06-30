@@ -74,16 +74,30 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-function playVideo() {
-  const video = document.getElementById('hero-video');
-  const playBtn = document.querySelector('.play-btn');
-  if (video) {
-    video.muted = false;
+function openVideoOverlay() {
+  const overlay = document.getElementById('videoFullscreenOverlay');
+  const video = document.getElementById('hero-video-fullscreen');
+  if (overlay && video) {
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    video.currentTime = 0;
     video.play().catch(() => {
       video.muted = true;
       video.play();
     });
-    if (playBtn) playBtn.classList.add('hidden');
+  }
+}
+
+function closeVideoOverlay() {
+  const overlay = document.getElementById('videoFullscreenOverlay');
+  const video = document.getElementById('hero-video-fullscreen');
+  if (overlay) {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
   }
 }
 

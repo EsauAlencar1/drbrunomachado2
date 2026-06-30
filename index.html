@@ -87,16 +87,24 @@
 <!-- DOBRA 1 — HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-video-bg">
-    <video playsinline controls id="hero-video" preload="metadata" poster="logo.webp">
+  <div class="hero-video-bg" onclick="openVideoOverlay()">
+    <video playsinline id="hero-video" preload="metadata" poster="logo.webp">
       <source src="apresentacao.MP4" type="video/mp4">
       <track kind="captions" srclang="pt" label="Português">
     </video>
     <div class="hero-video-overlay"></div>
-    <button class="play-btn" onclick="playVideo()" aria-label="Reproduzir vídeo">
+    <button class="play-btn" aria-label="Reproduzir vídeo">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
       <span>Clique e assista</span>
     </button>
+  </div>
+  <!-- Video Fullscreen Overlay -->
+  <div class="video-fullscreen-overlay" id="videoFullscreenOverlay">
+    <button class="video-close-btn" onclick="closeVideoOverlay()" aria-label="Fechar vídeo">&times;</button>
+    <video playsinline controls id="hero-video-fullscreen" preload="metadata" poster="logo.webp">
+      <source src="apresentacao.MP4" type="video/mp4">
+      <track kind="captions" srclang="pt" label="Português">
+    </video>
   </div>
   <div class="hero-content">
     <div class="eyebrow"><span class="eyebrow-line"></span>Ortopedia e Traumatologia<span class="eyebrow-line"></span></div>
