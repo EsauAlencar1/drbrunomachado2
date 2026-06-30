@@ -79,7 +79,10 @@ function playVideo() {
   const playBtn = document.querySelector('.play-btn');
   if (video) {
     video.muted = false;
-    video.play();
+    video.play().catch(() => {
+      video.muted = true;
+      video.play();
+    });
     if (playBtn) playBtn.classList.add('hidden');
   }
 }
