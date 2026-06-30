@@ -876,7 +876,7 @@ h1          { animation-delay:0.3s; }
   box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
 }
 .form-group input::placeholder {
-  color: rgba(148, 163, 184, 0.6);
+  color: rgba(148, 163, 184, 0.8);
 }
 .btn-submit {
   width: 100%;
@@ -1681,7 +1681,7 @@ h1          { animation-delay:0.3s; }
   box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
 }
 .modal-card input::placeholder {
-  color: rgba(148, 163, 184, 0.6);
+  color: rgba(148, 163, 184, 0.8);
 }
 
 /* RESPONSIVE — DOBRAS */
