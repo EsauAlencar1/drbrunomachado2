@@ -85,6 +85,9 @@ function openVideoOverlay() {
       video.muted = true;
       video.play();
     });
+    video.onended = function() {
+      closeVideoOverlay();
+    };
   }
 }
 
@@ -98,6 +101,7 @@ function closeVideoOverlay() {
   if (video) {
     video.pause();
     video.currentTime = 0;
+    video.onended = null;
   }
 }
 
