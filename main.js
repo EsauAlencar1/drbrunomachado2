@@ -195,7 +195,9 @@ function submitForm(e) {
   }, 800);
 
   setTimeout(() => {
-    window.open('https://chat.whatsapp.com/Eoa7fBtUYORLwc9g0LJFVX', '_blank');
+    const nome = document.getElementById('nome').value;
+    const msg = encodeURIComponent(`Olá, vim pelo site. Meu nome é ${nome}. Gostaria de agendar uma consulta.`);
+    window.open(`https://wa.me/+558694262812?text=${msg}`, '_blank');
   }, 1500);
 }
 
