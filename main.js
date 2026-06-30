@@ -84,13 +84,6 @@ function playVideo() {
       video.play();
     });
     if (playBtn) playBtn.classList.add('hidden');
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen();
-    } else if (video.webkitEnterFullscreen) {
-      video.webkitEnterFullscreen();
-    }
   }
 }
 

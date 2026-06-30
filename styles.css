@@ -680,7 +680,7 @@ h1          { animation-delay:0.3s; }
   nav{ padding:16px 24px; }
   .nav-links{ display:none; }
   .hero{ grid-template-columns:1fr; min-height:auto; padding-bottom:60px; }
-  .hero-video-bg{ height:50vw; min-height:200px; max-height:320px; }
+  .hero-video-bg{ height:60vw; min-height:250px; max-height:400px; }
   .hero-left{ padding:130px 28px 60px; }
   h1{ font-size:clamp(36px, 8vw, 52px); }
   .hero-desc{ font-size:14px; max-width:360px; }
@@ -734,7 +734,7 @@ h1          { animation-delay:0.3s; }
 
 /* Play Button */
 .play-btn {
-  position: absolute;
+  display: none;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -1722,7 +1722,7 @@ h1          { animation-delay:0.3s; }
   .diff-grid { grid-template-columns: 1fr; }
   .steps-grid { grid-template-columns: 1fr; }
   h1{ font-size:32px; }
-  .hero-video-bg{ height:45vw; min-height:180px; max-height:260px; }
+  .hero-video-bg{ height:55vw; min-height:220px; max-height:350px; }
   .hero-desc{ font-size:13px; max-width:300px; }
   .hero-stats{ gap:12px 20px; }
   .stat-n{ font-size:18px; }
