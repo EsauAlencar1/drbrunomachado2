@@ -108,6 +108,22 @@ nav {
 }
 .nav-btn-whatsapp:hover { background: #22c55e; transform: scale(1.03); }
 
+/* NAV IG BUTTON */
+.nav-btn-ig {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.nav-btn-ig:hover { transform: scale(1.03); opacity: 0.9; }
+
 /* HAMBURGER BUTTON */
 .nav-hamburger {
   display: none;
