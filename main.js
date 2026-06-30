@@ -131,6 +131,14 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSTuD2KkGDpFep7Wgw_
 
 function submitForm(e) {
   e.preventDefault();
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.innerHTML;
+  
+  // Loading state
+  submitBtn.classList.add('btn-loading');
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span>Enviando...</span>';
+
   const nome = document.getElementById('nome').value;
   const cidade = document.getElementById('cidade').value;
   const whatsapp = document.getElementById('whatsapp').value;
@@ -156,16 +164,26 @@ function submitForm(e) {
   form.submit();
   form.remove();
 
-  document.getElementById('leadForm').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
+  // Success state after short delay
+  setTimeout(() => {
+    submitBtn.classList.remove('btn-loading');
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+    document.getElementById('leadForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }, 800);
 
   setTimeout(() => {
     window.open('https://chat.whatsapp.com/Eoa7fBtUYORLwc9g0LJFVX', '_blank');
   }, 1500);
 }
 
-// === SCROLL-REVEAL ===
+// === SCROLL-REVEAL (Premium) ===
 (function() {
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return; // Skip animations
+
   const reveals = document.querySelectorAll(".sec, .video-item, .avaliacao-card");
   const textNodes = document.querySelectorAll(
     "main section :is(h2, h3, h4, p, .sec-label, .eyebrow), footer :is(h2, p)"
@@ -174,8 +192,8 @@ function submitForm(e) {
 
   all.forEach(el => {
     el.style.opacity = "0";
-    el.style.transform = "translateY(20px)";
-    el.style.transition = "opacity 800ms ease-out, transform 800ms ease-out";
+    el.style.transform = "translateY(24px)";
+    el.style.transition = "opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1)";
     el.style.willChange = "opacity, transform";
   });
 
@@ -183,14 +201,15 @@ function submitForm(e) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const i = all.indexOf(entry.target);
-        entry.target.style.transitionDelay = `${Math.min(i % 5, 4) * 70}ms`;
+        const delay = Math.min((i % 6), 5) * 80;
+        entry.target.style.transitionDelay = `${delay}ms`;
         entry.target.style.opacity = "1";
         entry.target.style.transform = "translateY(0)";
         entry.target.style.willChange = "auto";
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   all.forEach(el => obs.observe(el));
 
