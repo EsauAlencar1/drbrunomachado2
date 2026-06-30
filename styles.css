@@ -56,7 +56,7 @@ nav {
   backdrop-filter: blur(20px);
   transition: all 0.3s ease;
 }
-.nav-logo { height:36px; filter: brightness(1.2); }
+.nav-logo { height:auto; max-height:40px; filter: brightness(1.2); }
 .nav-links { display:flex; gap:40px; list-style:none; }
 .nav-links a {
   color: var(--dim); text-decoration:none;
