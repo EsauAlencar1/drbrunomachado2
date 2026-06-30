@@ -1519,6 +1519,19 @@ h1          { animation-delay:0.3s; }
   color: var(--white);
   font-weight: 500;
 }
+.sobre-foto {
+  margin: 24px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+.sobre-foto img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
 .sobre-badges {
   display: flex;
   flex-wrap: wrap;
