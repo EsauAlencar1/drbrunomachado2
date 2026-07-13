@@ -110,6 +110,7 @@ function openForm(mode = 'community') {
   const modal = document.getElementById('formModal');
   const leadForm = document.getElementById('leadForm');
   const leadFormTitle = document.getElementById('leadFormTitle');
+  const origemInput = document.getElementById('origem');
   const formSuccess = document.getElementById('formSuccess');
 
   if (leadForm && formSuccess) {
@@ -121,6 +122,10 @@ function openForm(mode = 'community') {
     leadFormTitle.textContent = mode === 'whatsapp'
       ? 'Falar conosco pelo WhatsApp'
       : 'Entre na Comunidade';
+  }
+
+  if (origemInput) {
+    origemInput.value = mode === 'whatsapp' ? 'WhatsApp' : 'Comunidade';
   }
 
   modal.style.display = 'flex';
@@ -231,9 +236,10 @@ function submitForm(e) {
   const nome = document.getElementById('nome').value;
   const cidade = document.getElementById('cidade').value;
   const whatsapp = whatsappInput.value;
+  const origem = document.getElementById('origem').value;
 
   const leads = JSON.parse(localStorage.getItem('leads') || '[]');
-  leads.push({ nome, cidade, whatsapp, data: new Date().toLocaleString('pt-BR') });
+  leads.push({ nome, cidade, whatsapp, origem, data: new Date().toLocaleString('pt-BR') });
   localStorage.setItem('leads', JSON.stringify(leads));
 
   const form = document.createElement('form');
@@ -246,9 +252,12 @@ function submitForm(e) {
   p2.type = 'hidden'; p2.name = 'cidade'; p2.value = cidade;
   const p3 = document.createElement('input');
   p3.type = 'hidden'; p3.name = 'whatsapp'; p3.value = whatsapp;
+  const p4 = document.createElement('input');
+  p4.type = 'hidden'; p4.name = 'origem'; p4.value = origem;
   form.appendChild(p1);
   form.appendChild(p2);
   form.appendChild(p3);
+  form.appendChild(p4);
   document.body.appendChild(form);
   form.submit();
   form.remove();

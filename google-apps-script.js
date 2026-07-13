@@ -24,6 +24,7 @@ function doGet(e) {
     var nome = e.parameter.nome;
     var cidade = e.parameter.cidade;
     var whatsapp = e.parameter.whatsapp;
+    var origem = e.parameter.origem;
     
     // Abre a planilha ativa
     var sheet = SpreadsheetApp.getActiveSheet();
@@ -33,7 +34,8 @@ function doGet(e) {
       new Date(),    // Data/Hora
       nome,          // Nome
       cidade,        // Cidade
-      whatsapp       // WhatsApp
+      whatsapp,      // WhatsApp
+      origem         // Origem do clique
     ]);
     
     // Retorna sucesso
