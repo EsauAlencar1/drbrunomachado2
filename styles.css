@@ -910,6 +910,15 @@ h1          { animation-delay:0.3s; }
 .form-group input::placeholder {
   color: rgba(148, 163, 184, 0.8);
 }
+#whatsapp[aria-invalid="true"] {
+  border-color: rgba(248, 113, 113, 0.85);
+  background: rgba(248, 113, 113, 0.08);
+  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.2);
+}
+#whatsapp[aria-invalid="true"]:focus {
+  border-color: #f87171;
+  box-shadow: 0 0 20px rgba(248, 113, 113, 0.12);
+}
 .btn-submit {
   width: 100%;
   display: flex;

@@ -108,6 +108,14 @@ function closeVideoOverlay() {
 // === MODAL - Lead Form ===
 function openForm() {
   const modal = document.getElementById('formModal');
+  const leadForm = document.getElementById('leadForm');
+  const formSuccess = document.getElementById('formSuccess');
+
+  if (leadForm && formSuccess) {
+    leadForm.style.display = 'block';
+    formSuccess.style.display = 'none';
+  }
+
   modal.style.display = 'flex';
   setTimeout(() => modal.classList.add('active'), 10);
   document.body.style.overflow = 'hidden';
@@ -120,6 +128,57 @@ function closeForm() {
     modal.style.display = 'none';
     document.body.style.overflow = '';
   }, 300);
+}
+
+function getWhatsappDigits(value) {
+  return (value || '').replace(/\D/g, '').slice(0, 11);
+}
+
+function formatWhatsappValue(value) {
+  const digits = getWhatsappDigits(value);
+
+  if (!digits) return '';
+  if (digits.length <= 2) return `(${digits}`;
+  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
+function updateWhatsappValidation(options = {}) {
+  const { showError = false } = options;
+  const whatsappInput = document.getElementById('whatsapp');
+  const whatsappError = document.getElementById('whatsappError');
+  const whatsappCounter = document.getElementById('whatsappCounter');
+
+  if (!whatsappInput) return true;
+
+  const rawValue = whatsappInput.value;
+  const hasLetters = /[A-Za-zÀ-ÿ]/.test(rawValue);
+  const digits = getWhatsappDigits(rawValue);
+  whatsappInput.value = formatWhatsappValue(digits);
+
+  if (whatsappCounter) {
+    whatsappCounter.textContent = `${digits.length}/11 dígitos`;
+    whatsappCounter.style.color = (showError && digits.length !== 11) || hasLetters ? '#f87171' : 'var(--dim)';
+  }
+
+  let message = '';
+  if (hasLetters) {
+    message = 'Não use letras. Digite apenas DDD + 9 dígitos, por exemplo (11) 91234-5678.';
+  } else if (showError && digits.length !== 11) {
+    message = 'Digite 11 números: DDD + 9 dígitos, como (11) 91234-5678.';
+  }
+
+  if (typeof whatsappInput.setCustomValidity === 'function') {
+    whatsappInput.setCustomValidity(message);
+  }
+  whatsappInput.setAttribute('aria-invalid', message ? 'true' : 'false');
+
+  if (whatsappError) {
+    whatsappError.textContent = message;
+    whatsappError.style.display = message ? 'block' : 'none';
+  }
+
+  return message === '';
 }
 
 document.addEventListener('keydown', (e) => {
@@ -136,14 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const whatsappInput = document.getElementById('whatsapp');
   if (whatsappInput) {
-    whatsappInput.addEventListener('input', (e) => {
-      let value = e.target.value.replace(/\D/g, '');
-      if (value.length <= 11) {
-        value = value.replace(/(\d{2})(\d)/, '($1) $2');
-        value = value.replace(/(\d{5})(\d)/, '$1-$2');
-      }
-      e.target.value = value;
-    });
+    whatsappInput.addEventListener('input', () => updateWhatsappValidation({ showError: false }));
+    whatsappInput.addEventListener('blur', () => updateWhatsappValidation({ showError: true }));
+    whatsappInput.addEventListener('paste', () => setTimeout(() => updateWhatsappValidation({ showError: false }), 0));
   }
 });
 
@@ -152,6 +206,13 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSTuD2KkGDpFep7Wgw_
 
 function submitForm(e) {
   e.preventDefault();
+  const whatsappInput = document.getElementById('whatsapp');
+  if (!updateWhatsappValidation({ showError: true })) {
+    whatsappInput?.focus();
+    whatsappInput?.reportValidity?.();
+    return;
+  }
+
   const submitBtn = e.target.querySelector('button[type="submit"]');
   const originalText = submitBtn.innerHTML;
   
@@ -162,7 +223,7 @@ function submitForm(e) {
 
   const nome = document.getElementById('nome').value;
   const cidade = document.getElementById('cidade').value;
-  const whatsapp = document.getElementById('whatsapp').value;
+  const whatsapp = whatsappInput.value;
 
   const leads = JSON.parse(localStorage.getItem('leads') || '[]');
   leads.push({ nome, cidade, whatsapp, data: new Date().toLocaleString('pt-BR') });
