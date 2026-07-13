@@ -106,14 +106,21 @@ function closeVideoOverlay() {
 }
 
 // === MODAL - Lead Form ===
-function openForm() {
+function openForm(mode = 'community') {
   const modal = document.getElementById('formModal');
   const leadForm = document.getElementById('leadForm');
+  const leadFormTitle = document.getElementById('leadFormTitle');
   const formSuccess = document.getElementById('formSuccess');
 
   if (leadForm && formSuccess) {
     leadForm.style.display = 'block';
     formSuccess.style.display = 'none';
+  }
+
+  if (leadFormTitle) {
+    leadFormTitle.textContent = mode === 'whatsapp'
+      ? 'Falar conosco pelo WhatsApp'
+      : 'Entre na Comunidade';
   }
 
   modal.style.display = 'flex';
