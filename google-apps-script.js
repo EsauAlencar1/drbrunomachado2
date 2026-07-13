@@ -18,25 +18,32 @@
 //
 // ============================================
 
+var SPREADSHEET_ID = '1fUS4fvZwPWBoY4OujYEcJf0LZ1jridqnsobv_mKln1U';
+
+function getLeadsSheet() {
+  var spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  return spreadsheet.getSheets()[0];
+}
+
 function doGet(e) {
   try {
     // Pega os parâmetros da URL
-    var nome = e.parameter.nome;
-    var cidade = e.parameter.cidade;
-    var whatsapp = e.parameter.whatsapp;
-    var origem = e.parameter.origem;
+    var nome = (e.parameter.nome || '').trim();
+    var cidade = (e.parameter.cidade || '').trim();
+    var whatsapp = (e.parameter.whatsapp || '').trim();
+    var origem = (e.parameter.origem || '').trim() || 'Não informado';
     
-    // Abre a planilha ativa
-    var sheet = SpreadsheetApp.getActiveSheet();
+    // Abre a planilha correta
+    var sheet = getLeadsSheet();
     
-    // Adiciona uma nova linha com os dados
-    sheet.appendRow([
+    // Adiciona uma nova linha com os dados, explicitamente nas colunas A:E
+    sheet.getRange(sheet.getLastRow() + 1, 1, 1, 5).setValues([[
       new Date(),    // Data/Hora
       nome,          // Nome
       cidade,        // Cidade
       whatsapp,      // WhatsApp
       origem         // Origem do clique
-    ]);
+    ]]);
     
     // Retorna sucesso
     return ContentService.createTextOutput(
