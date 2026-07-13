@@ -244,7 +244,7 @@ function submitForm(e) {
 
   const form = document.createElement('form');
   form.method = 'GET';
-  form.action = `${SCRIPT_URL}?origem=${encodeURIComponent(origem)}`;
+  form.action = SCRIPT_URL;
   form.target = 'hidden_iframe';
   const p1 = document.createElement('input');
   p1.type = 'hidden'; p1.name = 'nome'; p1.value = nome;
@@ -252,9 +252,12 @@ function submitForm(e) {
   p2.type = 'hidden'; p2.name = 'cidade'; p2.value = cidade;
   const p3 = document.createElement('input');
   p3.type = 'hidden'; p3.name = 'whatsapp'; p3.value = whatsapp;
+  const p4 = document.createElement('input');
+  p4.type = 'hidden'; p4.name = 'origem'; p4.value = origem;
   form.appendChild(p1);
   form.appendChild(p2);
   form.appendChild(p3);
+  form.appendChild(p4);
   document.body.appendChild(form);
   form.submit();
   form.remove();
