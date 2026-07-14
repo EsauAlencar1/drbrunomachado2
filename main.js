@@ -215,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // === FORM SUBMIT ===
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSTuD2KkGDpFep7Wgw_A6TtmByH9owq1VDTB3Y6d1W6fxjdGtmXeNnfdk3pKOA4QrI/exec';
+const COMMUNITY_URL = 'https://chat.whatsapp.com/Eoa7fBtUYORLwc9g0LJFVX';
 
 function submitForm(e) {
   e.preventDefault();
@@ -237,9 +238,10 @@ function submitForm(e) {
   const cidade = document.getElementById('cidade').value;
   const whatsapp = whatsappInput.value;
   const origem = document.getElementById('origem').value;
+  const email = document.getElementById('email').value;
 
   const leads = JSON.parse(localStorage.getItem('leads') || '[]');
-  leads.push({ nome, cidade, whatsapp, origem, data: new Date().toLocaleString('pt-BR') });
+  leads.push({ nome, cidade, whatsapp, origem, email, data: new Date().toLocaleString('pt-BR') });
   localStorage.setItem('leads', JSON.stringify(leads));
 
   const form = document.createElement('form');
@@ -254,10 +256,13 @@ function submitForm(e) {
   p3.type = 'hidden'; p3.name = 'whatsapp'; p3.value = whatsapp;
   const p4 = document.createElement('input');
   p4.type = 'hidden'; p4.name = 'origem'; p4.value = origem;
+  const p5 = document.createElement('input');
+  p5.type = 'hidden'; p5.name = 'email'; p5.value = email;
   form.appendChild(p1);
   form.appendChild(p2);
   form.appendChild(p3);
   form.appendChild(p4);
+  form.appendChild(p5);
   document.body.appendChild(form);
   form.submit();
   form.remove();
@@ -274,7 +279,8 @@ function submitForm(e) {
   setTimeout(() => {
     const nome = document.getElementById('nome').value;
     const msg = encodeURIComponent(`Olá, vim pelo site. Meu nome é ${nome}. Gostaria de agendar uma consulta.`);
-    window.open(`https://wa.me/+558694262812?text=${msg}`, '_blank');
+    const destino = origem.toLowerCase().includes('comunidade') ? COMMUNITY_URL : `https://wa.me/+558694262812?text=${msg}`;
+    window.open(destino, '_blank');
   }, 1500);
 }
 

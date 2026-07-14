@@ -27,22 +27,30 @@ function getLeadsSheet() {
 
 function doGet(e) {
   try {
-    // Pega os parâmetros da URL
-    var nome = (e.parameter.nome || '').trim();
-    var cidade = (e.parameter.cidade || '').trim();
-    var whatsapp = (e.parameter.whatsapp || '').trim();
-    var origem = (e.parameter.origem || '').trim() || 'Não informado';
+    var params = e && e.parameter ? e.parameter : {};
+
+    // Pega os parâmetros da URL/formulário
+    var nome = (params.nome || '').trim();
+    var cidade = (params.cidade || '').trim();
+    var whatsapp = (params.whatsapp || '').trim();
+    var email = (params.email || '').trim();
+    var origem = (params.origem || '').trim().toLowerCase();
+
+    var origemWhatsapp = origem.indexOf('whatsapp') !== -1 ? 'WhatsApp' : '';
+    var origemComunidade = origem.indexOf('comunidade') !== -1 ? 'Comunidade' : '';
     
     // Abre a planilha correta
     var sheet = getLeadsSheet();
     
-    // Adiciona uma nova linha com os dados, explicitamente nas colunas A:E
-    sheet.getRange(sheet.getLastRow() + 1, 1, 1, 5).setValues([[
-      new Date(),    // Data/Hora
-      nome,          // Nome
-      cidade,        // Cidade
-      whatsapp,      // WhatsApp
-      origem         // Origem do clique
+    // Adiciona uma nova linha com os dados, explicitamente nas colunas A:G
+    sheet.getRange(sheet.getLastRow() + 1, 1, 1, 7).setValues([[
+      new Date(),          // A: Data/Hora
+      nome,                // B: Nome
+      cidade,              // C: Cidade
+      whatsapp,            // D: Telefone/WhatsApp digitado
+      origemWhatsapp,      // E: Origem WhatsApp
+      origemComunidade,    // F: Origem Comunidade
+      email                // G: Email opcional
     ]]);
     
     // Retorna sucesso
