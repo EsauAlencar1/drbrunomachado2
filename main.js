@@ -110,6 +110,7 @@ function openForm(mode = 'community') {
   const modal = document.getElementById('formModal');
   const leadForm = document.getElementById('leadForm');
   const leadFormTitle = document.getElementById('leadFormTitle');
+  const leadFormSubmitText = document.getElementById('leadFormSubmitText');
   const origemInput = document.getElementById('origem');
   const formSuccess = document.getElementById('formSuccess');
 
@@ -122,6 +123,12 @@ function openForm(mode = 'community') {
     leadFormTitle.textContent = mode === 'whatsapp'
       ? 'Falar conosco pelo WhatsApp'
       : 'Entre na Comunidade';
+  }
+
+  if (leadFormSubmitText) {
+    leadFormSubmitText.textContent = mode === 'whatsapp'
+      ? 'Fale conosco no whatsapp'
+      : 'Quero entrar';
   }
 
   if (origemInput) {
