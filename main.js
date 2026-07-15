@@ -247,6 +247,25 @@ function submitForm(e) {
   const whatsapp = whatsappInput.value;
   const origem = document.getElementById('origem').value;
   const email = document.getElementById('email').value;
+  const nomeNormalizado = nome.trim();
+  const partesNome = nomeNormalizado.split(/\s+/).filter(Boolean);
+  const telefoneNumeros = getWhatsappDigits(whatsapp);
+  const telefoneComPais = telefoneNumeros.length === 10 || telefoneNumeros.length === 11
+    ? `55${telefoneNumeros}`
+    : telefoneNumeros;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'lead_form_submit',
+    lead_name: nomeNormalizado,
+    lead_first_name: partesNome[0] || '',
+    lead_last_name: partesNome.slice(1).join(' '),
+    lead_city: cidade.trim(),
+    lead_email: email.trim().toLowerCase(),
+    lead_phone: telefoneComPais,
+    lead_phone_display: whatsapp,
+    lead_origin: origem
+  });
 
   const leads = JSON.parse(localStorage.getItem('leads') || '[]');
   leads.push({ nome, cidade, whatsapp, origem, email, data: new Date().toLocaleString('pt-BR') });
