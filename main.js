@@ -225,6 +225,26 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSTuD2KkGDpFep7Wgw_
 const COMMUNITY_URL = 'https://chat.whatsapp.com/Eoa7fBtUYORLwc9g0LJFVX';
 const WHATSAPP_URL = 'https://api.whatsapp.com/send?phone=558694262812';
 
+function getLeadCookieDomain() {
+  return window.location.hostname.endsWith('drbrunomachadoortopedista.com.br')
+    ? '; Domain=.drbrunomachadoortopedista.com.br'
+    : '';
+}
+
+function setLeadCookie(name, value) {
+  const maxAge = 60 * 60 * 24 * 30;
+  const expires = new Date(Date.now() + maxAge * 1000).toUTCString();
+  const cookieDomain = getLeadCookieDomain();
+  const normalizedValue = (value || '').toString().trim();
+
+  if (!normalizedValue) {
+    document.cookie = `${name}=; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Path=/${cookieDomain}; SameSite=None; Secure`;
+    return;
+  }
+
+  document.cookie = `${name}=${encodeURIComponent(normalizedValue)}; Max-Age=${maxAge}; Expires=${expires}; Path=/${cookieDomain}; SameSite=None; Secure`;
+}
+
 function submitForm(e) {
   e.preventDefault();
   const whatsappInput = document.getElementById('whatsapp');
@@ -253,9 +273,7 @@ function submitForm(e) {
   const telefoneComPais = telefoneNumeros.length === 10 || telefoneNumeros.length === 11
     ? `55${telefoneNumeros}`
     : telefoneNumeros;
-
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
+  const leadData = {
     event: 'lead_form_submit',
     lead_name: nomeNormalizado,
     lead_first_name: partesNome[0] || '',
@@ -265,7 +283,19 @@ function submitForm(e) {
     lead_phone: telefoneComPais,
     lead_phone_display: whatsapp,
     lead_origin: origem
-  });
+  };
+
+  setLeadCookie('city', leadData.lead_city);
+  setLeadCookie('cidade', leadData.lead_city);
+  setLeadCookie('email', leadData.lead_email);
+  setLeadCookie('nome', leadData.lead_first_name);
+  setLeadCookie('first_name', leadData.lead_first_name);
+  setLeadCookie('sobrenome', leadData.lead_last_name);
+  setLeadCookie('last_name', leadData.lead_last_name);
+  setLeadCookie('telefone', leadData.lead_phone);
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(leadData);
 
   const leads = JSON.parse(localStorage.getItem('leads') || '[]');
   leads.push({ nome, cidade, whatsapp, origem, email, data: new Date().toLocaleString('pt-BR') });
