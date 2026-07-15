@@ -223,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // === FORM SUBMIT ===
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSTuD2KkGDpFep7Wgw_A6TtmByH9owq1VDTB3Y6d1W6fxjdGtmXeNnfdk3pKOA4QrI/exec';
 const COMMUNITY_URL = 'https://chat.whatsapp.com/Eoa7fBtUYORLwc9g0LJFVX';
+const WHATSAPP_URL = 'https://api.whatsapp.com/send?phone=558694262812';
 
 function submitForm(e) {
   e.preventDefault();
@@ -292,7 +293,7 @@ function submitForm(e) {
       'Vim pelo site e gostaria de mais informações'
     ].join('\n');
     const msg = encodeURIComponent(mensagemWhatsapp);
-    const destino = origem.toLowerCase().includes('comunidade') ? COMMUNITY_URL : `https://wa.me/+558****2812?text=${msg}`;
+    const destino = origem.toLowerCase().includes('comunidade') ? COMMUNITY_URL : `${WHATSAPP_URL}&text=${msg}`;
     window.open(destino, '_blank');
   }, 1500);
 }
