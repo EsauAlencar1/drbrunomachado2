@@ -284,9 +284,15 @@ function submitForm(e) {
   }, 800);
 
   setTimeout(() => {
-    const nome = document.getElementById('nome').value;
-    const msg = encodeURIComponent(`Olá, vim pelo site. Meu nome é ${nome}. Gostaria de agendar uma consulta.`);
-    const destino = origem.toLowerCase().includes('comunidade') ? COMMUNITY_URL : `https://wa.me/+558694262812?text=${msg}`;
+    const mensagemWhatsapp = [
+      `Nome: ${nome}`,
+      `Cidade: ${cidade}`,
+      `Telefone: ${whatsapp}`,
+      `Email: ${email || 'Não informado'}`,
+      'Vim pelo site e gostaria de mais informações'
+    ].join('\n');
+    const msg = encodeURIComponent(mensagemWhatsapp);
+    const destino = origem.toLowerCase().includes('comunidade') ? COMMUNITY_URL : `https://wa.me/+558****2812?text=${msg}`;
     window.open(destino, '_blank');
   }, 1500);
 }
