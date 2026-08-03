@@ -1,4 +1,40 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.drbrunomachadoortopedista.com.br"
+        }
+      ],
+      "destination": "https://lp.drbrunomachadoortopedista.com.br/comunidade/",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "comunidademovimentadores-git-main-ea-mkts-projects.vercel.app"
+        }
+      ],
+      "destination": "https://lp.drbrunomachadoortopedista.com.br/comunidade/",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "comunidademovimentadores-e1cmtgi6d-ea-mkts-projects.vercel.app"
+        }
+      ],
+      "destination": "https://lp.drbrunomachadoortopedista.com.br/comunidade/",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
